@@ -6,8 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import AppStack from "./src/navigation/AppStack";
 
 export default function App() {
-  I18nManager.forceRTL(true);
-  I18nManager.allowRTL(true);
+  I18nManager.forceRTL(false);
+  I18nManager.allowRTL(false);
 
   let [fontsLoaded] = useFonts({
     Bold: require("./src/assets/fonts/Bold.ttf"),

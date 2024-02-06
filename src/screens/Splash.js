@@ -1,5 +1,9 @@
 import { View, Text, ActivityIndicator } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
+import {
+    FontAwesome5,
+
+} from "@expo/vector-icons";
 export default function Splash({ route, navigation }) {
 
     useEffect(() => {
@@ -21,7 +25,7 @@ export default function Splash({ route, navigation }) {
                 أهلا في تطبيق الحجز السريع
             </Text>
 
-
+            <FontAwesome5 name="hotel" size={70} color={"#FFF"} />
             <ActivityIndicator size={70} color={"#FFF"} style={{
                 marginTop: 100
             }} />
