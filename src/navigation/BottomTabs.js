@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
     Ionicons,
     MaterialIcons,
-    MaterialCommunityIcons
+    MaterialCommunityIcons,
+    FontAwesome5
 } from "@expo/vector-icons";
 
 import Home from "./../screens/Home";
@@ -50,7 +51,7 @@ export default TabNavigator = () => {
                     tabBarLabel: ({ color, size }) =>
                         <Text style={{ fontFamily: "Regular", color }}>الفنادق</Text>,
                     tabBarIcon: ({ color, size }) =>
-                        <MaterialIcons name="favorite-outline" size={22} color={color} />
+                        <FontAwesome5 name="hotel" size={22} color={color} />
                 }}
             />
 
