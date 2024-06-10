@@ -2,32 +2,54 @@
   "expo": {
     "name": "reserv",
     "slug": "reserv",
-    "version": "1.0.0",
+    "version": "1.1.6",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/adaptive-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFF"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "buildNumber": "16",
+      "supportsTablet": false,
+      "bundleIdentifier": "com.seyahaa.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Fast Reservation App App requires access to your camera to let Capture Pictures to publish your Adds on Fast Reservation App ",
+        "NSPhotoLibraryUsageDescription": "Fast Reservation App needs to access your camera roll to enable you to choose Pictures for your items  ",
+        "NSPhotoLibraryAddUsageDescription": "Fast Reservation App needs to access your camera roll so that you can upload Pictures to insert your items",
+        "NSLocationWhenInUseUsageDescription": "Your Location Is Used For Showing You The Nearest real estate items to you",
+        "NSLocationAlwaysUsageDescription": "Your Location Is Used For Showing You The Nearest real estate items to you",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Your Location Is Used For Showing You The Nearest real estate items to you",
+        "NSLocationUsageDescription": "Your Location Is Used For Showing You The Nearest real estate items to you",
+        "NSCalendarsUsageDescription": "This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.",
+        "NSContactsUsageDescription": "This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.",
+        "NSMicrophoneUsageDescription": "This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.",
+        "NSMotionUsageDescription": "This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.",
+        "NSRemindersUsageDescription": "This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#34ace0"
+      },
+      "package": "com.seyahaa.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "06c848db-5643-43a8-8088-5250951c776a"
+      }
+    }
   }
 }

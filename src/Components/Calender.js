@@ -1,37 +1,74 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Text,
     View
 } from "react-native";
-import { days } from "./../const/source";
+import { days, months, year } from "./../const/source";
 import { Dropdown } from "react-native-element-dropdown";
 import styles from "../theme/style";
 
-export const Calender = ({ title }) => {
+const Calender = ({ label, title, onDateChange, plus, dropdownPosition }) => {
+
+
+    const current_year = new Date().getFullYear().toString();
+    const current_month = (new Date().getMonth() + 1).toString();
+    const current_day = ((new Date().getDate()) + plus).toString();
+
+    const [selectedYear, setSelectedYear] = useState(current_year);
+    const [selectedMonth, setSelectedMonth] = useState(current_month);
+    const [selectedDay, setSelectedDay] = useState(current_day);
+
+
+
+    const handleMonthChange = (month) => {
+        setSelectedMonth(month);
+        // Notify parent component about the change
+        onDateChange(selectedYear, month, selectedDay);
+    };
+
+    const handleDayChange = (day) => {
+        setSelectedDay(day);
+        // Notify parent component about the change
+        onDateChange(selectedYear, selectedMonth, day);
+    };
     return (
         <View
             style={{
-                paddingHorizontal: 5,
                 paddingVertical: 10,
                 marginTop: 10,
                 width: "100%",
-                paddingHorizontal: 10
             }}>
-            <Text
-                style={{
-                    fontFamily: "Bold",
-                    textAlign: "right",
-                    marginBottom: 5,
-                    color: "#000",
-                    zIndex: 10,
-                    marginBottom: 20
-                }}
-            >
-                {title}
-            </Text>
             <View style={{
-                flexDirection: "row",
+                flexDirection: "row-reverse",
+                alignItems: "center"
+            }}>
+
+                <Text
+                    style={{
+                        fontFamily: "Bold",
+                        textAlign: "right",
+                        marginBottom: 5,
+                        color: "red",
+                        zIndex: 10,
+                        marginBottom: 20
+                    }}>
+                    {label}  {" "}
+                </Text>
+                <Text
+                    style={{
+                        fontFamily: "Bold",
+                        textAlign: "right",
+                        marginBottom: 5,
+                        color: "#000",
+                        zIndex: 10,
+                        marginBottom: 20
+                    }}>
+                    {title}  {" "}
+                </Text>
+            </View>
+            <View style={{
+                flexDirection: "row-reverse",
                 alignItems: "center",
                 justifyContent: "space-between"
             }}>
@@ -40,16 +77,16 @@ export const Calender = ({ title }) => {
                     width: "30%",
                     alignItems: "center"
                 }}>
-
                     <Text style={{
                         fontFamily: "Regular",
                         color: "#000",
                         marginVertical: 2,
                         textAlign: "right",
-                    }}>اليوم
-
+                    }}>
+                        اليوم
                     </Text>
                     <Dropdown
+                        dropdownPosition={dropdownPosition}
                         style={styles.dropdown}
                         placeholderStyle={styles.placeholderStyle}
                         selectedTextStyle={styles.selectedTextStyle}
@@ -57,18 +94,14 @@ export const Calender = ({ title }) => {
                         iconStyle={styles.iconStyle}
                         itemTextStyle={{ fontFamily: "Regular", fontSize: 12 }}
                         data={days}
-                        //search
+                        value={selectedDay}
                         placeholder="1"
                         maxHeight={300}
-                        labelField="city"
-                        valueField="city"
-                        //onFocus={() => setIsFocus(true)}
-                        //onBlur={() => setIsFocus(false)}
-                        onChange={val => {
-                            // PushValue(item.input_key, val.value);
-                            // setIsFocus(false);
+                        labelField="title"
+                        valueField="title"
+                        onChange={(item) => {
+                            handleDayChange(parseInt(item.title).toString())
                         }}
-
                     />
                 </View>
 
@@ -87,28 +120,24 @@ export const Calender = ({ title }) => {
                         textAlign: "right",
                     }}>
                         الشهر
-
                     </Text>
                     <Dropdown
+                        dropdownPosition={dropdownPosition}
                         style={styles.dropdown}
                         placeholderStyle={styles.placeholderStyle}
                         selectedTextStyle={styles.selectedTextStyle}
                         inputSearchStyle={styles.inputSearchStyle}
                         iconStyle={styles.iconStyle}
                         itemTextStyle={{ fontFamily: "Regular", fontSize: 12 }}
-                        data={days}
-                        //search
+                        data={months}
+                        value={selectedMonth}
                         placeholder="1"
                         maxHeight={300}
-                        labelField="city"
-                        valueField="city"
-                        //onFocus={() => setIsFocus(true)}
-                        //onBlur={() => setIsFocus(false)}
-                        onChange={val => {
-                            // PushValue(item.input_key, val.value);
-                            // setIsFocus(false);
+                        labelField="title"
+                        valueField="title"
+                        onChange={(item) => {
+                            handleMonthChange(parseInt(item.title).toString())
                         }}
-
                     />
                 </View>
 
@@ -129,30 +158,25 @@ export const Calender = ({ title }) => {
                         السنة
                     </Text>
                     <Dropdown
+                        dropdownPosition={dropdownPosition}
                         style={styles.dropdown}
                         placeholderStyle={styles.placeholderStyle}
                         selectedTextStyle={styles.selectedTextStyle}
                         inputSearchStyle={styles.inputSearchStyle}
                         iconStyle={styles.iconStyle}
                         itemTextStyle={{ fontFamily: "Regular", fontSize: 12 }}
-                        data={days}
-                        //search
-                        placeholder="1"
+                        data={year}
+                        value={selectedYear}
                         maxHeight={300}
-                        labelField="city"
-                        valueField="city"
-                        //onFocus={() => setIsFocus(true)}
-                        //onBlur={() => setIsFocus(false)}
-                        onChange={val => {
-                            // PushValue(item.input_key, val.value);
-                            // setIsFocus(false);
-                        }}
-
+                        labelField="title"
+                        valueField="title"
+                        disable
                     />
                 </View>
-
             </View>
-
         </View>
     );
 };
+
+
+export default Calender;

@@ -1,8 +1,97 @@
 
 import { StyleSheet, Dimensions } from "react-native";
+import Constants from "expo-constants";
+
 const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#F3F5F7",
+        paddingTop: Constants.statusBarHeight
+    },
+    header: {
+        paddingTop: Constants.statusBarHeight,
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingBottom: 5
+    },
+    cats: {
+        flexDirection: "row",
+        marginVertical: 20
+    },
+    cat: {
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    catItem: {
+        borderWidth: 2,
+        borderColor: "#FF9000",
+        marginHorizontal: 10,
+        borderRadius: 30,
+        width: 60,
+        height: 60,
+        resizeMode: "contain",
+        borderRadius: 30
+    },
+    catText: {
+        fontFamily: "Bold",
+        color: "#143656",
+        marginVertical: 5,
+        fontFamily: "Bold"
+    },
+
+    body: {
+        width: "100%",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        paddingHorizontal: 5
+    },
+    itemContent: {
+        alignItems: "flex-start",
+        justifyContent: "space-between",
+        flexDirection: "row-reverse",
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        height: 150,
+        width: "100%"
+    },
+    featuredItem: {
+        height: 160,
+        alignItems: "flex-start",
+        padding: 5,
+        flexDirection: "row-reverse"
+    },
+
+    itemImg: {
+        width: "100%",
+        resizeMode: "cover",
+        height: 160,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
+    },
+
+    logo: {
+        width: 50,
+        height: 50,
+        padding: 5,
+        borderRadius: 26,
+        borderWidth: 1,
+        borderColor: "#000"
+    },
+
+    itemContainer: {
+        borderRadius: 15,
+        marginHorizontal: 5,
+        width: "100%",
+        marginVertical: 5,
+        backgroundColor: "#FFF",
+        elevation: 5
+    },
+    item: {
+        width: "100%"
+    },
     dropdown: {
         backgroundColor: "#fff",
         height: 55,
@@ -28,10 +117,10 @@ const styles = StyleSheet.create({
         fontSize: 14
     },
     placeholderStyle: {
-        fontSize: 14,
-        fontFamily: "Regular",
+        fontSize: 12,
+        fontFamily: "Bold",
         paddingHorizontal: 10,
-        color: "grey",
+        color: "#000",
         textAlign: "right",
 
     },

@@ -1,0 +1,34 @@
+{
+  "cli": {
+    "version": ">= 7.1.3"
+  },
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "app-bundle"
+      }
+    },
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:bundleRelease"
+      }
+    },
+    "preview3": {
+      "developmentClient": true
+    },
+    "production": {
+      "android": {
+        "buildType": "app-bundle"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "seyaha.iraq@gmail.com",
+        "ascAppId": "6451325580",
+        "appleTeamId": "946XXXF8VS"
+      }
+    }
+  }
+}
