@@ -1,8 +1,7 @@
 const api = {
     baseURL: "https://services.alhajz-alsarea.com/api/",
-    mediaURL: "https://admin.alhajz-alsarea.com/ImagesRepository/",
+    mediaURL: "https://alhajz-alsarea.com/ImagesRepository/",
 };
-
 
 const offerTypes = [
     {

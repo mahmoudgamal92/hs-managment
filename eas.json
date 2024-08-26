@@ -5,7 +5,7 @@
   "build": {
     "preview": {
       "android": {
-        "buildType": "app-bundle"
+        "buildType": "apk"
       }
     },
     "preview2": {
@@ -25,9 +25,9 @@
   "submit": {
     "production": {
       "ios": {
-        "appleId": "seyaha.iraq@gmail.com",
-        "ascAppId": "6451325580",
-        "appleTeamId": "946XXXF8VS"
+        "appleId": "alaaautodesk2021@gmail.com",
+        "ascAppId": "6508169320",
+        "appleTeamId": "GDX3F45RG7"
       }
     }
   }

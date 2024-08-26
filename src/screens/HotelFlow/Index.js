@@ -93,7 +93,7 @@ export default function Hotels({ route, navigation }) {
         <View style={{
             paddingTop: Constants.statusBarHeight,
         }}>
-            <StatusBar barStyle="default" backgroundColor="#34ace0" />
+            <StatusBar translucent backgroundColor="transparent" />
             <View
                 style={{
                     width: "100%",

@@ -13,7 +13,7 @@ import {
 } from "@expo/vector-icons";
 import { Dropdown } from "react-native-element-dropdown";
 import styles from "../../theme/style";
-import { GetAllChaletByFilter } from './../../network';
+import { GetAllChaletByFilter, getChaletsByCity } from './../../network';
 import { cities, offerTypes } from "../../const/api";
 import Calender from "../../Components/Calender";
 import Constants from 'expo-constants';
@@ -80,6 +80,19 @@ export default function Chalets({ route, navigation }) {
         setStartDate(`${month}-${day}-${year}`);
     };
 
+    const _getChalestByCity = async (city) => {
+        const chalets = await getChaletsByCity(city);
+
+        if (Array.isArray(chalets)) {
+            chalets.length > 0 ? navigation.navigate("ChaletsAndFarmsNewList", {
+                chalets: chalets,
+            }) : alert('لا توجد عروض في هذه المدينه');
+        }
+        else {
+            alert('لا توجد عروض في هذه المدينه');
+        }
+        console.log(chalets);
+    }
 
     const _applySearch = async () => {
         let params = {};
@@ -151,11 +164,9 @@ export default function Chalets({ route, navigation }) {
                     chalets: chalets,
                     filters: params
                 }) : alert("لايوجد شاليهات متاحة حاليا")
-
-                console.log(chalets)
             }
             else {
-                alert(chalets);
+                alert(" لا توجد عروض في هذا التاريخ");
             }
             setLoading(false);
         }
@@ -192,12 +203,10 @@ export default function Chalets({ route, navigation }) {
             <ScrollView>
                 <View style={{
                     paddingHorizontal: 20,
-                    marginVertical: 20
                 }}>
                     <View
                         style={{
                             paddingHorizontal: 5,
-                            paddingVertical: 10,
                             marginTop: 10,
                             width: "100%",
                             paddingHorizontal: 10
@@ -239,7 +248,7 @@ export default function Chalets({ route, navigation }) {
                                 width: "100%",
                                 alignItems: "center",
                                 justifyContent: "space-between",
-                                marginVertical: 10,
+                                marginVertical: 5,
                                 backgroundColor: "#FFF",
                                 borderRadius: 20,
                                 borderColor: "#DDDDDD",
@@ -339,9 +348,6 @@ export default function Chalets({ route, navigation }) {
                     </View>
 
 
-
-
-
                     <View style={{
                         paddingHorizontal: 15,
                     }}>
@@ -387,6 +393,72 @@ export default function Chalets({ route, navigation }) {
                             </Text>
                         }
                     </TouchableOpacity>
+
+
+                    <View style={{
+                        borderTopColor: 'grey',
+                        borderTopWidth: 2
+                    }}>
+
+                        <Text
+                            style={{
+                                fontFamily: "Regular",
+                                textAlign: "right",
+                                marginTop: 10,
+                                marginBottom: 10,
+                                color: "red",
+                                zIndex: 10,
+                                paddingHorizontal: 10
+                            }}>
+                            * من هنا يمكنك مشاهده كل المزارع والشاليهات وكل الحجوزات المتوفره
+                        </Text>
+
+                        <Dropdown
+                            style={styles.dropdown}
+                            placeholderStyle={styles.placeholderStyle}
+                            selectedTextStyle={styles.selectedTextStyle}
+                            inputSearchStyle={styles.inputSearchStyle}
+                            iconStyle={styles.iconStyle}
+                            itemTextStyle={{ fontFamily: "Regular", fontSize: 12 }}
+                            data={cities}
+                            //search
+                            maxHeight={300}
+                            labelField="arabicName"
+                            valueField="id"
+                            placeholder="أختر المنطقة"
+                            dropdownPosition='top'
+                            onChange={item => {
+                                _getChalestByCity(item.id);
+                            }}
+                            renderLeftIcon={() =>
+                                <MaterialIcons
+                                    style={styles.icon}
+                                    name="keyboard-arrow-down"
+                                    size={24}
+                                    color={"#000"}
+                                />}
+                            renderRightIcon={() =>
+                                <Feather
+                                    style={styles.icon}
+                                    color={"#000"}
+                                    name="home"
+                                    size={20}
+                                />}
+                        />
+
+                        <Text
+                            style={{
+                                fontFamily: "Bold",
+                                textAlign: "right",
+                                marginTop: 5,
+                                marginBottom: 5,
+                                color: "blue",
+                                zIndex: 10,
+                                paddingHorizontal: 10
+                            }}>
+                            ملاحظه سيبدا البحث بعد اختيار المدينه مباشره *
+                        </Text>
+                    </View>
                 </View>
             </ScrollView>
 

@@ -7,8 +7,11 @@ import {
     ImageBackground,
     FlatList,
     Linking,
-    ScrollView
+    ScrollView,
+    TextInput,
+    useWindowDimensions
 } from "react-native";
+
 import React, { useState, useRef, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
 import {
@@ -25,12 +28,42 @@ import {
 import Constants from 'expo-constants';
 import { api } from "../../const/api";
 import Modal from "react-native-modal";
+import RenderHtml from 'react-native-render-html';
 
 export default function ChaletResult({ route, navigation }) {
     const { chalets, filters } = route.params;
     const [modalVisible, setModalVisible] = useState(false);
+    const [detailsModalVisible, setDetailsModalVisible] = useState(false);
+    const [chaletDescription, setChaletDescription] = useState("");
+
+    const { width } = useWindowDimensions();
+
+    // console.log(chalets)
     const [modalImages, setModalImages] = useState([]);
 
+    const [avalibleChalets, setAvalibleChalets] = useState(chalets);
+
+    const [serachText, setSearchText] = useState('');
+
+    function filterChaletsByName(searchText) {
+        setSearchText(searchText)
+        const lowercasedSearchText = searchText.toLowerCase();
+        setAvalibleChalets(chalets.filter(chalet =>
+            chalet.chaletName.toLowerCase().includes(lowercasedSearchText)));
+    }
+
+
+
+    function sortChaletsByPrice(order) {
+        const sortedChalets = [...chalets].sort((a, b) => {
+            if (order === 'asc') {
+                return a.price - b.price;
+            } else if (order === 'desc') {
+                return b.price - a.price;
+            }
+        });
+        setAvalibleChalets(sortedChalets);
+    }
     const _renderTime = (from, to) => {
         if (filters.OfferType == 1) {
             return "من: " + from + " صباحا" + " إلي : " + to + " صباحا ";
@@ -45,8 +78,6 @@ export default function ChaletResult({ route, navigation }) {
             return "من: " + from + " مساءا  " + " إلي : " + to + " صباحا ";
         }
     }
-    // console.log("====================");
-    // console.log(filters.OfferType);
     return (
         <View style={styles.container}>
             <StatusBar translucent backgroundColor="#34ace0" />
@@ -116,6 +147,52 @@ export default function ChaletResult({ route, navigation }) {
                 </View>
             </Modal>
 
+
+
+            <Modal
+                isVisible={detailsModalVisible}
+                style={{
+                    //maxHeight: 200,
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
+                <View style={{
+                    backgroundColor: "#FFF",
+                    width: "100%",
+                    borderRadius: 20,
+                    padding: 10,
+                    height: 600
+                }}>
+
+                    <View style={{
+                        borderBottomColor: "#DDDDDD",
+                        borderBottomWidth: 1,
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between"
+                    }}>
+                        <TouchableOpacity
+
+                            onPress={() => setDetailsModalVisible(false)}>
+                            <AntDesign name="close" size={24} color="#586261" />
+                        </TouchableOpacity>
+
+                        <Text style={{
+                            fontFamily: "Bold",
+                            padding: 5
+                        }}>
+                            التفاصيل
+                        </Text>
+
+
+                    </View>
+                    <RenderHtml
+                        contentWidth={width * 0.9}
+                        source={{ html: chaletDescription }}
+                    />
+                </View>
+            </Modal>
+
             <View
                 style={{
                     width: "100%",
@@ -138,487 +215,624 @@ export default function ChaletResult({ route, navigation }) {
                 </TouchableOpacity>
             </View>
 
+
             <View style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
+                flexDirection: 'row-reverse',
+                alignItems: 'center',
+                width: '100%',
+                justifyContent: 'space-between',
+                marginVertical: 20,
                 paddingHorizontal: 10
             }}>
 
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{
-                        alignItems: "center",
-                        justifyContent: "center",
-                        width: "100%"
-                    }}
-                    data={chalets}
-                    keyExtractor={(item, index) => index}
-                    renderItem={({ item }) =>
+                <View style={{
+                    backgroundColor: '#3D0A48',
+                    width: '45%',
+                    height: 35,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingHorizontal: 1,
+                    borderRadius: 5,
+                    flexDirection: 'row'
+                }}>
 
-                        <TouchableOpacity
-                            //onPress={() => navigation.navigate("ChaletDetails")}
-                            style={{
-                                borderWidth: 1,
-                                borderColor: "#DDDDDD",
-                                borderRadius: 10,
-                                backgroundColor: "#FFF",
-                                paddingHorizontal: 10,
-                                paddingVertical: 5,
-                                marginVertical: 10,
-                                shadowColor: "#000",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 5,
-                                },
-                                shadowOpacity: 0.36,
-                                shadowRadius: 6.68,
+                    <TextInput
+                        onChangeText={(text) => filterChaletsByName(text)}
+                        placeholder={'البحث باسم المزرعه'}
+                        value={serachText}
+                        style={{
+                            width: '80%',
+                            fontSize: 12,
+                            color: '#FFF',
+                            fontFamily: 'Regular',
+                            paddingHorizontal: 5
+                        }}
+                        placeholderTextColor={'#FFF'}
+                    />
 
-                                elevation: 11,
-                            }}
-                        >
+                    <AntDesign name="search1" size={24} color="#FFF" />
 
 
+                </View>
+
+
+                <TouchableOpacity
+                    onPress={() => sortChaletsByPrice('desc')}
+                    style={{
+                        backgroundColor: '#3D0A48',
+                        width: '25%',
+                        height: 35,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'row',
+                        paddingHorizontal: 1,
+                        borderRadius: 5
+                    }}>
+                    <Text style={{
+                        color: '#FFF',
+                        fontFamily: 'Regular',
+                        fontSize: 12
+                    }}>
+                        الاعلى سعرا
+                    </Text>
+                    <Ionicons name="caret-down" size={16} color="#FFF" />
+
+                </TouchableOpacity>
+
+
+                <TouchableOpacity
+                    onPress={() => sortChaletsByPrice('asc')}
+                    style={{
+                        backgroundColor: '#3D0A48',
+                        width: '25%',
+                        height: 35,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'row',
+                        paddingHorizontal: 1,
+                        borderRadius: 5
+                    }}>
+                    <Text style={{
+                        color: '#FFF',
+                        fontFamily: 'Regular',
+                        fontSize: 12
+                    }}>
+                        سعرا
+                    </Text>
+                    <Ionicons name="caret-up" size={16} color="#FFF" />
+
+                </TouchableOpacity>
+            </View>
+
+
+
+
+            <FlatList
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%"
+                }}
+                data={avalibleChalets}
+                keyExtractor={(item, index) => index}
+                renderItem={({ item }) =>
+                    <TouchableOpacity
+                        style={{
+                            borderWidth: 1,
+                            borderColor: "#DDDDDD",
+                            borderRadius: 10,
+                            backgroundColor: "#FFF",
+                            paddingHorizontal: 10,
+                            paddingVertical: 5,
+                            marginVertical: 10,
+                            shadowColor: "#000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 5,
+                            },
+                            shadowOpacity: 0.36,
+                            shadowRadius: 6.68,
+
+                            elevation: 11,
+                        }}
+                    >
+                        <View style={{
+                            flexDirection: "row-reverse",
+                            alignItems: "center",
+                            justifyContent: "space-between"
+                        }}>
+
+                            <View style={{
+                                width: "50%",
+                                alignItems: 'flex-end'
+                            }}>
+                                <Text style={{
+                                    fontFamily: "Bold",
+                                    textAlign: 'right'
+                                }}>
+                                    {item.chaletName}
+                                </Text>
+                                <Text style={{
+                                    fontFamily: "Regular",
+                                    color: "#00AA76",
+                                    textAlign: 'right'
+                                }}>
+                                    نوع الحجز : {item.offerTypeName}
+                                </Text>
+
+                                <View style={{
+                                    flexDirection: "row-reverse",
+                                    justifyContent: 'flex-start',
+                                    alignItems: "center",
+                                    backgroundColor: '#3D0A48',
+                                    paddingVertical: 5,
+                                    borderRadius: 10,
+                                    marginTop: 5,
+                                    width: '100%'
+                                }}>
+                                    <Text style={{
+                                        fontFamily: "Regular",
+                                        color: "#FFF",
+                                        fontSize: 12,
+                                    }}>
+                                        {`${'الشخص المحسوب من: '} ${item.adultsAge} ${' سنه '}`}                                    </Text>
+                                </View>
+                            </View>
 
 
                             <View style={{
-                                flexDirection: "row-reverse",
-                                alignItems: "center",
-                                justifyContent: "space-between"
+                                width: "50%"
                             }}>
 
                                 <View style={{
-                                    width: "50%"
+                                    flexDirection: "row-reverse",
+                                    alignItems: "center",
+                                    backgroundColor: "#34ace0",
+                                    paddingVertical: 10,
+                                    padding: 5,
+                                    borderRadius: 10
                                 }}>
-                                    <Text style={{
-                                        fontFamily: "Bold"
-                                    }}>
-                                        {item.chaletName}
-                                    </Text>
+
                                     <Text style={{
                                         fontFamily: "Regular",
-                                        color: "#00AA76"
+                                        color: "#FFF",
+                                        fontSize: 10,
                                     }}>
-                                        نوع الحجز : {item.offerTypeName}
+
+                                        {_renderTime(item.offerTimeFrom, item.offerTimeTo)}
                                     </Text>
+
+
                                 </View>
 
-
                                 <View style={{
-                                    width: "50%"
+                                    flexDirection: 'row-reverse',
+                                    paddingTop: 5
                                 }}>
-
-                                    <View style={{
-                                        flexDirection: "row-reverse",
-                                        alignItems: "center",
-                                        backgroundColor: "#34ace0",
-                                        paddingVertical: 10,
-                                        padding: 5,
-                                        borderRadius: 10
-                                    }}>
-
-                                        <Text style={{
-                                            fontFamily: "Regular",
-                                            color: "#FFF",
-                                            fontSize: 10,
-                                        }}>
-
-                                            {_renderTime(item.offerTimeFrom, item.offerTimeTo)}
-                                        </Text>
-
-
-                                    </View>
-
-
                                     <Text style={{
                                         fontFamily: "Regular"
                                     }}>
-                                        السعر لحد {item.adultsNumber} بالغ : {item.price} د.ع
+                                        السعر لحد {item.adultsNumber} شخص :
+                                    </Text>
+
+                                    <Text style={{
+                                        backgroundColor: 'red',
+                                        color: '#FFF',
+                                        fontFamily: "Regular",
+                                        padding: 1, borderRadius: 5
+                                    }}>
+                                        {' '}{item.price} الف{' '}
                                     </Text>
                                 </View>
 
                             </View>
 
+                        </View>
+
+                        <View style={{
+                            flexDirection: "row-reverse",
+                            marginVertical: 20,
+                        }}>
+
+
                             <View style={{
-                                flexDirection: "row-reverse",
-                                marginVertical: 20,
+                                width: "40%",
+                                alignItems: "center",
+                                justifyContent: "center",
+
                             }}>
+                                <ImageBackground source={{ uri: api.mediaURL + item.mainImage }}
+                                    style={{
+                                        width: "100%",
+                                        height: 260,
+                                        borderRadius: 10,
+                                        justifyContent: "flex-end",
+                                    }}
 
+                                    imageStyle={{
+                                        borderRadius: 10
+                                    }}
+                                    resizeMode="cover">
 
-                                <View style={{
-                                    width: "40%",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-
-                                }}>
-                                    <ImageBackground source={{ uri: api.mediaURL + item.mainImage }}
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            setModalImages(item.chaletGallery)
+                                            setModalVisible(true)
+                                        }}
                                         style={{
-                                            width: "100%",
-                                            height: 260,
-                                            borderRadius: 10,
-                                            justifyContent: "flex-end",
-                                        }}
+                                            backgroundColor: "#1D4746",
+                                            padding: 5,
+                                            borderRadius: 5,
+                                            flexDirection: "row-reverse",
+                                            alignItems: "center"
+                                        }}>
+                                        <FontAwesome5 name="images" size={24} color="#FFF" style={{
+                                            marginHorizontal: 5
+                                        }} />
+                                        <Text style={{
+                                            color: "#FFF",
+                                            fontFamily: "Regular"
+                                        }}>
+                                            عرض الصور
+                                        </Text>
+                                    </TouchableOpacity>
+                                </ImageBackground>
 
-                                        imageStyle={{
-                                            borderRadius: 10
-                                        }}
-                                        resizeMode="cover">
-
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                setModalImages(item.chaletGallery)
-                                                setModalVisible(true)
-                                            }}
-                                            style={{
-                                                backgroundColor: "#1D4746",
-                                                padding: 5,
-                                                borderRadius: 5,
-                                                flexDirection: "row-reverse",
-                                                alignItems: "center"
-                                            }}>
-                                            <FontAwesome5 name="images" size={24} color="#FFF" style={{
-                                                marginHorizontal: 5
-                                            }} />
-                                            <Text style={{
-                                                color: "#FFF",
-                                                fontFamily: "Regular"
-                                            }}>
-                                                عرض الصور
-                                            </Text>
-                                        </TouchableOpacity>
-                                    </ImageBackground>
-
-                                    <View>
-
-                                    </View>
-
+                                <View>
 
                                 </View>
 
+
+                            </View>
+
+                            <View style={{
+                                width: "60%",
+                                paddingHorizontal: 5
+                            }}>
+
                                 <View style={{
-                                    width: "60%",
-                                    paddingHorizontal: 5
+                                    flexDirection: "row-reverse",
+                                    flexWrap: "wrap",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
                                 }}>
+                                    <View style={{
+                                        width: "33%",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+                                        <Text style={{
+                                            fontFamily: "Bold",
+                                            fontSize: 10,
+                                            color: "#34ace0",
+                                            marginVertical: 1
+                                        }}>
+                                            الأشخاص الإضافيين
+                                        </Text>
+                                        <FontAwesome5 name="users" size={24} color="#586261" />
+                                        <Text style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 10,
+                                            color: "#000",
+                                            marginVertical: 1
+                                        }}>
+                                            {item.personsNumber}
+                                        </Text>
+                                    </View>
 
                                     <View style={{
-                                        flexDirection: "row-reverse",
-                                        flexWrap: "wrap",
+                                        width: "33%",
                                         alignItems: "center",
-                                        justifyContent: "space-between",
+                                        justifyContent: "center"
                                     }}>
-                                        <View style={{
-                                            width: "33%",
-                                            alignItems: "center",
-                                            justifyContent: "center"
+                                        <Text style={{
+                                            fontFamily: "Bold",
+                                            fontSize: 10,
+                                            color: "#34ace0",
+                                            marginVertical: 1
                                         }}>
-                                            <Text style={{
-                                                fontFamily: "Bold",
-                                                fontSize: 10,
-                                                color: "#34ace0",
-                                                marginVertical: 1
-                                            }}>
-                                                الأشخاص الإضافيين
-                                            </Text>
-                                            <FontAwesome5 name="users" size={24} color="#586261" />
-                                            <Text style={{
-                                                fontFamily: "Regular",
-                                                fontSize: 10,
-                                                color: "#000",
-                                                marginVertical: 1
-                                            }}>
-                                                {item.personsNumber}
-                                            </Text>
-                                        </View>
+                                            السعر للشخص الإضافي
+                                        </Text>
+                                        <FontAwesome5 name="money-bill" size={24} color="#586261" />
 
-                                        <View style={{
-                                            width: "33%",
-                                            alignItems: "center",
-                                            justifyContent: "center"
+                                        <Text style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 10,
+                                            color: "#000",
+                                            marginVertical: 1
                                         }}>
-                                            <Text style={{
-                                                fontFamily: "Bold",
-                                                fontSize: 10,
-                                                color: "#34ace0",
-                                                marginVertical: 1
-                                            }}>
-                                                السعر للشخص الإضافي
-                                            </Text>
-                                            <FontAwesome5 name="money-bill" size={24} color="#586261" />
+                                            {item.priceForAdditionalPersons}
+                                        </Text>
+                                    </View>
 
-                                            <Text style={{
-                                                fontFamily: "Regular",
-                                                fontSize: 10,
-                                                color: "#000",
-                                                marginVertical: 1
-                                            }}>
-                                                {item.priceForAdditionalPersons}
-                                            </Text>
-                                        </View>
-
-                                        <View style={{
-                                            width: "33%",
-                                            alignItems: "center",
-                                            justifyContent: "center"
+                                    <View style={{
+                                        width: "33%",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+                                        <Text style={{
+                                            fontFamily: "Bold",
+                                            fontSize: 10,
+                                            color: "#34ace0",
+                                            marginVertical: 1
                                         }}>
-                                            <Text style={{
-                                                fontFamily: "Bold",
-                                                fontSize: 10,
-                                                color: "#34ace0",
-                                                marginVertical: 1
-                                            }}>
-                                                عدد الغرف
-                                            </Text>
-                                            <FontAwesome5 name="bed" size={24} color="#586261" />
+                                            عدد الغرف
+                                        </Text>
+                                        <FontAwesome5 name="bed" size={24} color="#586261" />
 
-                                            <Text style={{
-                                                fontFamily: "Regular",
-                                                fontSize: 10,
-                                                color: "#000",
-                                                marginVertical: 1
-                                            }}>
-                                                {item?.roomsNumber}
-                                            </Text>
-                                        </View>
-
-
-                                        <View style={{
-                                            width: "33%",
-                                            alignItems: "center",
-                                            justifyContent: "center"
+                                        <Text style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 10,
+                                            color: "#000",
+                                            marginVertical: 1
                                         }}>
-                                            <Text style={{
-                                                fontFamily: "Bold",
-                                                fontSize: 10,
-                                                color: "#34ace0",
-                                                marginVertical: 1
-                                            }}>
-                                                ألعاب أطفال
-                                            </Text>
-                                            <MaterialIcons name="child-care" size={24} color="black" />
-                                            <Text style={{
-                                                fontFamily: "Regular",
-                                                fontSize: 10,
-                                                color: "#000",
-                                                marginVertical: 1
-                                            }}>
-                                                {item.kidsToys == true ? "يوجد" : "لا يوجد"}
-                                            </Text>
-                                        </View>
-
-
-                                        <View style={{
-                                            width: "33%",
-                                            alignItems: "center",
-                                            justifyContent: "center"
-                                        }}>
-                                            <Text style={{
-                                                fontFamily: "Bold",
-                                                fontSize: 10,
-                                                color: "#34ace0",
-                                                marginVertical: 1
-                                            }}>
-                                                مسبح كبير
-                                            </Text>
-                                            <FontAwesome5 name="swimmer" size={24} color="#586261" />
-
-                                            <Text style={{
-                                                fontFamily: "Regular",
-                                                fontSize: 10,
-                                                color: "#000",
-                                                marginVertical: 1
-                                            }}>
-                                                {item.bigPool == true ? "يوجد" : "لا يوجد"}
-                                            </Text>
-                                        </View>
-
-
-
-                                        <View style={{
-                                            width: "33%",
-                                            alignItems: "center",
-                                            justifyContent: "center"
-                                        }}>
-                                            <Text style={{
-                                                fontFamily: "Bold",
-                                                fontSize: 10,
-                                                color: "#34ace0",
-                                                marginVertical: 1
-                                            }}>
-                                                عربون
-                                            </Text>
-                                            <FontAwesome5 name="money-bill" size={24} color="#586261" />
-
-                                            <Text style={{
-                                                fontFamily: "Regular",
-                                                fontSize: 10,
-                                                color: "#000",
-                                                marginVertical: 1
-                                            }}>
-                                                {item.deposit == true ? "يوجد" : "لا يوجد"}
-                                            </Text>
-                                        </View>
-
-
-
-
-
-
-
-                                        <View style={{
-                                            width: "33%",
-                                            alignItems: "center",
-                                            justifyContent: "center"
-                                        }}>
-                                            <Text style={{
-                                                fontFamily: "Bold",
-                                                fontSize: 10,
-                                                color: "#34ace0",
-                                                marginVertical: 1
-                                            }}>
-                                                مسبح حار
-                                            </Text>
-                                            <FontAwesome5 name="swimmer" size={24} color="#586261" />
-
-                                            <Text style={{
-                                                fontFamily: "Regular",
-                                                fontSize: 10,
-                                                color: "#000",
-                                                marginVertical: 1
-                                            }}>
-                                                {item.hotPool == true ? "يوجد" : "لا يوجد"}
-                                            </Text>
-                                        </View>
-
-
-                                        <View style={{
-                                            width: "33%",
-                                            alignItems: "center",
-                                            justifyContent: "center"
-                                        }}>
-                                            <Text style={{
-                                                fontFamily: "Bold",
-                                                fontSize: 10,
-                                                color: "#34ace0",
-                                                marginVertical: 1
-                                            }}>
-                                                مسبح صغير
-                                            </Text>
-                                            <FontAwesome5 name="swimmer" size={24} color="#586261" />
-
-                                            <Text style={{
-                                                fontFamily: "Regular",
-                                                fontSize: 10,
-                                                color: "#000",
-                                                marginVertical: 1
-                                            }}>
-                                                {item.smallPool == true ? "يوجد" : "لا يوجد"}
-                                            </Text>
-                                        </View>
-
-
-
-                                        <View style={{
-                                            width: "33%",
-                                            alignItems: "center",
-                                            justifyContent: "center"
-                                        }}>
-                                            <Text style={{
-                                                fontFamily: "Bold",
-                                                fontSize: 10,
-                                                color: "#34ace0",
-                                                marginVertical: 1
-                                            }}>
-                                                عدد الحمامات
-                                            </Text>
-                                            <FontAwesome5 name="bath" size={24} color="#586261" />
-
-                                            <Text style={{
-                                                fontFamily: "Regular",
-                                                fontSize: 10,
-                                                color: "#000",
-                                                marginVertical: 1
-                                            }}>
-                                                {item.bathroomNumber}
-                                            </Text>
-                                        </View>
+                                            {item?.roomsNumber}
+                                        </Text>
                                     </View>
 
 
-                                    <View style={{ backgroundColor: "yellow", padding: 5, borderRadius: 5, marginTop: 10 }}>
+                                    <View style={{
+                                        width: "33%",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
                                         <Text style={{
-                                            textAlign: "center",
-                                            fontFamily: "Regular",
-                                            fontSize: 12
+                                            fontFamily: "Bold",
+                                            fontSize: 10,
+                                            color: "#34ace0",
+                                            marginVertical: 1
                                         }}>
-                                            الدفع عن طريق {item.paymentMethod}
+                                            ألعاب أطفال
+                                        </Text>
+                                        <MaterialIcons name="child-care" size={24} color="black" />
+                                        <Text style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 10,
+                                            color: "#000",
+                                            marginVertical: 1
+                                        }}>
+                                            {item.kidsToys == true ? "يوجد" : "لا يوجد"}
+                                        </Text>
+                                    </View>
+
+
+                                    <View style={{
+                                        width: "33%",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+                                        <Text style={{
+                                            fontFamily: "Bold",
+                                            fontSize: 10,
+                                            color: "#34ace0",
+                                            marginVertical: 1
+                                        }}>
+                                            مسبح كبير
+                                        </Text>
+                                        <FontAwesome5 name="swimmer" size={24} color="#586261" />
+
+                                        <Text style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 10,
+                                            color: "#000",
+                                            marginVertical: 1
+                                        }}>
+                                            {item.bigPool == true ? "يوجد" : "لا يوجد"}
+                                        </Text>
+                                    </View>
+
+
+
+                                    <View style={{
+                                        width: "33%",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+                                        <Text style={{
+                                            fontFamily: "Bold",
+                                            fontSize: 10,
+                                            color: "#34ace0",
+                                            marginVertical: 1
+                                        }}>
+                                            فيشه + منضده
+                                        </Text>
+                                        <MaterialIcons name="table-restaurant" size={24} color="#586261" />
+
+                                        <Text style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 10,
+                                            color: "#000",
+                                            marginVertical: 1
+                                        }}>
+                                            {item.deposit == true ? "يوجد" : "لا يوجد"}
+                                        </Text>
+                                    </View>
+
+
+
+
+
+
+
+                                    <View style={{
+                                        width: "33%",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+                                        <Text style={{
+                                            fontFamily: "Bold",
+                                            fontSize: 10,
+                                            color: "#34ace0",
+                                            marginVertical: 1
+                                        }}>
+                                            مسبح حار
+                                        </Text>
+                                        <FontAwesome5 name="swimmer" size={24} color="#586261" />
+
+                                        <Text style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 10,
+                                            color: "#000",
+                                            marginVertical: 1
+                                        }}>
+                                            {item.hotPool == true ? "يوجد" : "لا يوجد"}
+                                        </Text>
+                                    </View>
+
+
+                                    <View style={{
+                                        width: "33%",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+                                        <Text style={{
+                                            fontFamily: "Bold",
+                                            fontSize: 10,
+                                            color: "#34ace0",
+                                            marginVertical: 1
+                                        }}>
+                                            مسبح صغير
+                                        </Text>
+                                        <FontAwesome5 name="swimmer" size={24} color="#586261" />
+
+                                        <Text style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 10,
+                                            color: "#000",
+                                            marginVertical: 1
+                                        }}>
+                                            {item.smallPool == true ? "يوجد" : "لا يوجد"}
+                                        </Text>
+                                    </View>
+
+
+
+                                    <View style={{
+                                        width: "33%",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+                                        <Text style={{
+                                            fontFamily: "Bold",
+                                            fontSize: 10,
+                                            color: "#34ace0",
+                                            marginVertical: 1
+                                        }}>
+                                            بلياردو
+                                        </Text>
+                                        <MaterialIcons name="table-restaurant" size={24} color="#586261" />
+
+                                        <Text style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 10,
+                                            color: "#000",
+                                            marginVertical: 1
+                                        }}>
+                                            {item.bathroomNumber}
                                         </Text>
                                     </View>
                                 </View>
-                            </View>
-                            <View style={{
-                                flexDirection: "row-reverse",
-                                alignItems: "center",
-                                justifyContent: "space-between"
-                            }}>
-                                <TouchableOpacity
-                                    onPress={() => navigation.navigate("ChaletsAndFarmsPreOrder", {
-                                        item: item,
-                                        filters: filters
-                                    })}
-                                    style={{
-                                        backgroundColor: "red",
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        borderRadius: 10,
-                                        paddingVertical: 5,
-                                        paddingHorizontal: 20,
-                                        marginTop: 10,
-                                        height: 40
-                                    }}>
+
+
+                                <View style={{ backgroundColor: "yellow", padding: 5, borderRadius: 5, marginTop: 10 }}>
                                     <Text style={{
-                                        fontFamily: "Bold",
-                                        color: "#FFF"
+                                        textAlign: "center",
+                                        fontFamily: "Regular",
+                                        fontSize: 12
                                     }}>
-                                        إحجــز الأن
+                                        الدفع عن طريق {item.paymentMethod}
                                     </Text>
-
-                                    <AntDesign name="shoppingcart" size={26} color="#FFF" />
-
-                                </TouchableOpacity>
-
-
-                                <TouchableOpacity
-                                    onPress={() => Linking.openURL(item.address)}
-
-                                    style={{
-                                        backgroundColor: "#00AA76",
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        borderRadius: 10,
-                                        paddingVertical: 5,
-                                        paddingHorizontal: 20,
-                                        marginTop: 10,
-                                        height: 40
-                                    }}>
-                                    <Text style={{
-                                        fontFamily: "Bold",
-                                        color: "#FFF"
-                                    }}>
-                                        اللوكيشن
-                                    </Text>
-
-                                    <EvilIcons name="location" size={24} color="#FFF" />
-
-                                </TouchableOpacity>
+                                </View>
                             </View>
+                        </View>
+                        <View style={{
+                            flexDirection: "row-reverse",
+                            alignItems: "center",
+                            justifyContent: "space-between"
+                        }}>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate("ChaletsAndFarmsPreOrder", {
+                                    item: item,
+                                    filters: filters
+                                })}
+                                style={{
+                                    backgroundColor: "red",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    borderRadius: 10,
+                                    paddingVertical: 5,
+                                    paddingHorizontal: 20,
+                                    marginTop: 10,
+                                    height: 40
+                                }}>
+                                <Text style={{
+                                    fontFamily: "Bold",
+                                    color: "#FFF"
+                                }}>
+                                    إحجــز الأن
+                                </Text>
+
+                                <AntDesign name="shoppingcart" size={26} color="#FFF" />
+
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setChaletDescription(item.chaletDescription)
+                                    setDetailsModalVisible(true)
+                                }}
+                                style={{
+                                    backgroundColor: "#34ace0",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    borderRadius: 10,
+                                    paddingVertical: 5,
+                                    paddingHorizontal: 10,
+                                    marginTop: 10,
+                                    height: 40
+                                }}>
+                                <Text style={{
+                                    fontFamily: "Bold",
+                                    color: "#FFF"
+                                }}>
+                                    التفاصيل
+                                </Text>
 
 
-                        </TouchableOpacity>
-                    } />
-            </View>
-        </View >
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                onPress={() => Linking.openURL(item.address)}
+
+                                style={{
+                                    backgroundColor: "#00AA76",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    borderRadius: 10,
+                                    paddingVertical: 5,
+                                    paddingHorizontal: 20,
+                                    marginTop: 10,
+                                    height: 40
+                                }}>
+                                <Text style={{
+                                    fontFamily: "Bold",
+                                    color: "#FFF"
+                                }}>
+                                    اللوكيشن
+                                </Text>
+
+                                <EvilIcons name="location" size={24} color="#FFF" />
+
+                            </TouchableOpacity>
+                        </View>
+
+
+                    </TouchableOpacity>
+                } />
+        </View>
     );
 }
 

@@ -34,6 +34,12 @@ import Services from "../screens/MoreFlow/Services";
 import About from "../screens/MoreFlow/About";
 import Contact from "../screens/MoreFlow/Contact";
 import Notification from "../screens/MoreFlow/Notification";
+import ChaletsAndFarmsNewList from "./../screens/ChaletsAndFarms/NewFlow/List";
+import MonthSelection from "./../screens/ChaletsAndFarms/NewFlow/MonthSelection";
+import Offers from "./../screens/ChaletsAndFarms/NewFlow/Offers";
+import NewPreOrder from "./../screens/ChaletsAndFarms/NewFlow/PreOrder";
+import NewChaletsAndFarmsConfirm from "./../screens/ChaletsAndFarms/NewFlow/ConfirmOrder";
+
 
 
 
@@ -63,7 +69,11 @@ export default AppStack = () => {
             <HomeStack.Screen name="ChaletsAndFarmsResult" component={ChaletsAndFarmsResult} />
             <HomeStack.Screen name="ChaletsAndFarmsPreOrder" component={ChaletsAndFarmsPreOrder} />
             <HomeStack.Screen name="ChaletsAndFarmsConfirm" component={ChaletsAndFarmsConfirm} />
-
+            <HomeStack.Screen name="ChaletsAndFarmsNewList" component={ChaletsAndFarmsNewList} />
+            <HomeStack.Screen name="MonthSelection" component={MonthSelection} />
+            <HomeStack.Screen name="Offers" component={Offers} />
+            <HomeStack.Screen name="NewPreOrder" component={NewPreOrder} />
+            <HomeStack.Screen name="NewChaletsAndFarmsConfirm" component={NewChaletsAndFarmsConfirm} />
             {/* North Chalet Section */}
             <HomeStack.Screen name="NorthChalets" component={NorthChalets} />
             <HomeStack.Screen name="NothChaletResult" component={NothChaletResult} />

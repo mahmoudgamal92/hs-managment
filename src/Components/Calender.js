@@ -35,8 +35,7 @@ const Calender = ({ label, title, onDateChange, plus, dropdownPosition }) => {
     return (
         <View
             style={{
-                paddingVertical: 10,
-                marginTop: 10,
+                paddingVertical: 5,
                 width: "100%",
             }}>
             <View style={{
@@ -51,7 +50,7 @@ const Calender = ({ label, title, onDateChange, plus, dropdownPosition }) => {
                         marginBottom: 5,
                         color: "red",
                         zIndex: 10,
-                        marginBottom: 20
+                        marginBottom: 5
                     }}>
                     {label}  {" "}
                 </Text>
@@ -62,7 +61,7 @@ const Calender = ({ label, title, onDateChange, plus, dropdownPosition }) => {
                         marginBottom: 5,
                         color: "#000",
                         zIndex: 10,
-                        marginBottom: 20
+                        marginBottom: 5
                     }}>
                     {title}  {" "}
                 </Text>

@@ -50,7 +50,6 @@ export const getSlider = async () => {
 };
 
 
-
 export const getCatigories = async () => {
     try {
         const response = await axiosInstance.get('Category/GetAll', { headers });
@@ -66,7 +65,36 @@ export const getCatigories = async () => {
     }
 };
 
+export const getChaletsByCity = async (city_id) => {
+    try {
+        const response = await axiosInstance.get('Chalet/GetAllByCityIdAndCategoryId?CategoryId=2&CityId=' + city_id, { headers });
+        if (response.status === 401) {
+            return response.status;
+        }
+        else {
+            return response.data;
+        }
 
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const GetAvaliableOffersByDate = async (ChaletID, item) => {
+    try {
+        console.log(`Chalet/GetAvaliableOffersByDate?ChaletID=${ChaletID}&DateFrom=${item.startDate}&DateTo=${item.endDate}`);
+        const response = await axiosInstance.get(`Chalet/GetAvaliableOffersByDate?ChaletID=${ChaletID}&DateFrom=${item.startDate}&DateTo=${item.endDate}`, { headers });
+        if (response.status === 401) {
+            return response.status;
+        }
+        else {
+            return response.data;
+        }
+
+    } catch (error) {
+        throw error;
+    }
+};
 
 export const getHotels = async (params) => {
     try {
@@ -155,15 +183,10 @@ export const sendHotelRequest = async (params) => {
     }
 };
 
-
-
 export const sendChaletRequest = async (params) => {
     var data = {};
-
     try {
-
-        const url = `https://services.alhajz-alsarea.com/api/Reservation/SaveChaletRequest?CategoryId=${params.CategoryId}&ChaletId=${params.ChaletId}&DateFrom=${params.DateFrom}&DateTo=${params.DateTo}&OfferID=${params.OfferID}&ApplicantName=${params.ApplicantName}&ApplicantMobileNumber=${params.ApplicantMobileNumber}&Arrivals=${params.Arrivals}&Arrivals=1&AdultsNumber=${params.AdultsNumber}&KidsNumber=${params.PersonsNumber}&TotalPrice=${params.TotalPrice}&IsOneDay=${params.IsOneDay}`;
-
+        const url = `https://services.alhajz-alsarea.com/api/Reservation/SaveChaletRequest?CategoryId=${params.CategoryId}&ChaletId=${params.ChaletId}&DateFrom=${params.DateFrom}&DateTo=${params.DateTo}&OfferID=${params.OfferID}&ApplicantName=${params.ApplicantName}&ApplicantMobileNumber=${params.ApplicantMobileNumber}&Arrivals=${params.Arrivals}&AdultsNumber=${params.AdultsNumber}&KidsNumber=${params.PersonsNumber}&TotalPrice=${params.TotalPrice}&IsOneDay=${params.IsOneDay}`;
 
         const response = await axiosInstance.post(url, data, {
             headers: headers
@@ -175,7 +198,6 @@ export const sendChaletRequest = async (params) => {
             return response.data;
         }
 
-        //return url;
 
     } catch (error) {
         console.log('There has been a problem with your fetch operation: ' + error);

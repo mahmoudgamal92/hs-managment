@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "reserv",
-    "slug": "reserv",
-    "version": "1.1.6",
+    "name": "Fast Reservation",
+    "slug": "fast_reserv",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -15,10 +15,19 @@
       "**/*"
     ],
     "ios": {
-      "buildNumber": "16",
+      "buildNumber": "2",
       "supportsTablet": false,
-      "bundleIdentifier": "com.seyahaa.app",
+      "bundleIdentifier": "com.quickbookingiraq.bluemedia",
       "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSExceptionDomains": {
+            "admin.alhajz-alsarea.com": {
+              "NSIncludesSubdomains": true,
+              "NSTemporaryExceptionAllowsInsecureHTTPLoads": true
+            }
+          }
+        },
         "NSCameraUsageDescription": "Fast Reservation App App requires access to your camera to let Capture Pictures to publish your Adds on Fast Reservation App ",
         "NSPhotoLibraryUsageDescription": "Fast Reservation App needs to access your camera roll to enable you to choose Pictures for your items  ",
         "NSPhotoLibraryAddUsageDescription": "Fast Reservation App needs to access your camera roll so that you can upload Pictures to insert your items",
@@ -38,7 +47,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#34ace0"
       },
-      "package": "com.seyahaa.app"
+      "package": "com.seyahaa.seyahaa"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -48,7 +57,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "06c848db-5643-43a8-8088-5250951c776a"
+        "projectId": "0a506747-aa12-4539-a6e8-dd6f9aee7010"
       }
     }
   }

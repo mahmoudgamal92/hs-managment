@@ -9,58 +9,31 @@ import {
     ScrollView
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { sendChaletRequest } from '../../network';
-import { ArrivalTypes } from "../../const/api";
+import { sendChaletRequest } from './../../../network';
+import { ArrivalTypes } from "./../../../const/api";
 import Constants from 'expo-constants';
 import axios from 'axios';
+import moment from "moment";
 
 export default function HotelConfirm({ route, navigation }) {
-    const { order_info, chalet, filters } = route.params;
+    const { order_info, chalet, offer, date } = route.params;
     const [loading, setLoading] = useState(false);
-
-
-
-    function parseDate(dateString) {
-        const parts = dateString.split('-');
-        return new Date(parts[2], parts[0] - 1, parts[1]);
-    }
-
-    function differenceInDays(date1, date2) {
-        const parsedDate1 = parseDate(date1);
-        const parsedDate2 = parseDate(date2);
-
-        if (isNaN(parsedDate1) || isNaN(parsedDate2)) {
-            return NaN; // Return NaN if parsing failed
-        }
-
-        const diff = Math.abs(parsedDate2 - parsedDate1);
-        let daysDifference = Math.floor(diff / (1000 * 60 * 60 * 24));
-        if (daysDifference === 0) {
-            daysDifference = 1;
-        }
-        return daysDifference;
-    }
-
-    const days_num = differenceInDays(filters.DateTo, filters.DateFrom);
-
-
-    const orderTotalPrice = (chalet?.price + parseInt(order_info?.additionalAdults) * parseInt(chalet.priceForAdditionalPersons) + parseInt(chalet.commissionAmount)) * days_num;
+    const orderTotalPrice = (offer?.price + parseInt(order_info?.additionalAdults) * parseInt(chalet.priceForAdditionalPersons) + parseInt(chalet.commissionAmount));
 
     const params = {
-        CategoryId: chalet.categoryId,
+        CategoryId: offer.categoryId,
         ChaletId: chalet.chaletID,
-        DateFrom: filters.DateFrom,
-        DateTo: filters.DateTo,
-        OfferID: chalet.offerID,
+        DateFrom: moment(date).format('MM-DD-YYYY'),
+        DateTo: moment(date).add(1, 'days').format('MM-DD-YYYY'),
+        OfferID: offer.offerID,
         ApplicantName: order_info.ApplicantName,
         ApplicantMobileNumber: order_info.ApplicantMobileNumber,
         Arrivals: order_info.Arrivals,
         AdultsNumber: order_info.AdultsNumber,
-        PersonsNumber: order_info.PersonsNumber,
-        IsOneDay: filters.IsOneDay,
+        PersonsNumber: chalet.PersonsNumber ?? 0,
+        IsOneDay: true,
         TotalPrice: orderTotalPrice
     }
-
     const sendWhatsappMsg = async (recipient, message) => {
         const formData = new FormData();
         formData.append('Token', '793312044');
@@ -103,12 +76,12 @@ export default function HotelConfirm({ route, navigation }) {
 
                 let msg = `\u202B
                 السلام عليكم ورحمه الله وبركاته
-                
+
                 السيد المحترم / ${userName}
-                
+
                 لديك طلب جديد، الرجاء الضغط على هذا الرابط لمشاهدة التفاصيل:
                 ${linkUrl}
-                
+
                 مع تحيات إدارة تطبيق الحجز السريع بالعراق
                 \u202C`;
 
@@ -281,12 +254,9 @@ export default function HotelConfirm({ route, navigation }) {
                         </Text>
 
                         <Text style={{ fontFamily: "Regular" }}>
-                            {filters?.DateFrom}
+                            {moment(date).format('MM-DD-YYYY')}
                         </Text>
                     </View>
-
-
-
 
                     <View style={{
                         paddingHorizontal: 20,
@@ -302,7 +272,8 @@ export default function HotelConfirm({ route, navigation }) {
                         </Text>
 
                         <Text style={{ fontFamily: "Regular" }}>
-                            {filters?.DateTo}
+                            {moment(date).add(1, 'days').format('MM-DD-YYYY')}
+
                         </Text>
                     </View>
 
@@ -343,8 +314,6 @@ export default function HotelConfirm({ route, navigation }) {
                             {order_info?.additionalAdults}
                         </Text>
                     </View>
-
-
                     <View style={{
                         paddingHorizontal: 20,
                         paddingVertical: 5,
@@ -355,14 +324,13 @@ export default function HotelConfirm({ route, navigation }) {
                         borderBottomColor: "#DDDDDD"
                     }}>
                         <Text style={{ fontFamily: "Bold" }}>
-                            سعر الشالية أو المنتجع
+                            السعر
                         </Text>
 
                         <Text style={{ fontFamily: "Regular" }}>
-                            {chalet?.price}
+                            {offer?.price}
                         </Text>
                     </View>
-
 
                     <View style={{
                         paddingHorizontal: 20,
@@ -392,11 +360,11 @@ export default function HotelConfirm({ route, navigation }) {
                         borderBottomColor: "#DDDDDD"
                     }}>
                         <Text style={{ fontFamily: "Bold" }}>
-                            عدد الأيام
+                            نوع الحجز
                         </Text>
 
                         <Text style={{ fontFamily: "Regular" }}>
-                            {days_num} يوم
+                            {offer?.offerTypeName}
                         </Text>
                     </View>
 

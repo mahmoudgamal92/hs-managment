@@ -9,7 +9,7 @@ export default function Splash({ route, navigation }) {
     useEffect(() => {
         setTimeout(() => {
             navigation.replace('TabNavigator');
-        }, 3000);
+        }, 1000);
     }, []);
     return (
         <View style={{

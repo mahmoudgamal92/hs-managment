@@ -27,7 +27,6 @@ export default function HotelConfirm({ route, navigation }) {
         KidsNumber: filters?.KidsNumber,
         TotalPrice: reservation?.total
     }
-    // https://services.alhajz-alsarea.com/api/Reservation/SaveHotelRequest?CategoryId=1&HotelId=7&DateFrom=5-6-2024&DateTo=5-7-2024&RoomAvailableID=undefined&RoomNumber=4&ApplicantName=Hiyt jygg hh&ApplicantMobileNumber=6325695&Arrivals=1&AdultsNumber=1&KidsNumber=1&TotalPrice=180000
     const _placeOrder = async () => {
         setLoading(true);
         const response = await sendHotelRequest(params);

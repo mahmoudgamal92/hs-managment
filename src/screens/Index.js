@@ -1,13 +1,13 @@
 import {
-    Image,
     Text,
     View,
     StyleSheet,
     TouchableOpacity,
     Dimensions,
     ScrollView,
-    ImageBackground
+    Image
 } from "react-native";
+
 import React, { useState, useRef, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
 import {
@@ -27,7 +27,9 @@ export default function HomePage({ route, navigation }) {
     useEffect(() => {
         _getInfo();
     }, [])
-
+    const handleImageError = (error) => {
+        console.log('Image load error:', error.nativeEvent.error);
+    };
 
     const _getInfo = async () => {
         const data = await getCatigories();
@@ -122,8 +124,6 @@ export default function HomePage({ route, navigation }) {
             <ScrollView style={{
                 width: "100%"
             }}>
-
-
                 <View style={{
                     alignItems: "center",
                     justifyContent: "center",
@@ -150,7 +150,6 @@ export default function HomePage({ route, navigation }) {
                             width: windowWidth,
                             height: 180,
                         }}>
-
                         {slider.map((item) => {
                             return (
                                 <View style={{
@@ -158,10 +157,10 @@ export default function HomePage({ route, navigation }) {
                                     alignItems: "center",
                                     justifyContent: "center"
                                 }}>
-
                                     <Image
                                         source={{ uri: api.mediaURL + item.bannerName }}
                                         resizeMode="cover"
+                                        onError={handleImageError}
                                         style={{
                                             width: windowWidth * 0.95,
                                             height: 180,
@@ -169,25 +168,11 @@ export default function HomePage({ route, navigation }) {
                                         }}
                                     />
                                 </View>
-
-
                             )
                         })
                         }
 
                     </ScrollView>
-
-                    {/* <Text style={{
-                        fontFamily: "Bold",
-                        textAlign: "right",
-                        marginTop: 40,
-                        fontSize: 15,
-                        width: "100%",
-                        paddingHorizontal: 20
-                    }}>
-                        الأقسام المتاحة :
-                    </Text> */}
-
 
                     <View
                         style={{
@@ -215,6 +200,7 @@ export default function HomePage({ route, navigation }) {
                                     <Image
                                         source={{ uri: api.mediaURL + item.mainImage }}
                                         resizeMode="cover"
+                                        onError={handleImageError}
                                         style={{
                                             width: "95%",
                                             height: 80,
