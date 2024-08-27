@@ -429,7 +429,7 @@ export default function Chalets({ route, navigation }) {
                                 zIndex: 10,
                                 paddingHorizontal: 10
                             }}>
-                            * من هنا يمكنك مشاهده كل المزارع والشاليهات وكل الحجوزات المتوفره
+                            * من هنا يمكنك مشاهدة كل المزارع والشاليهات وكل الحجوزات المتوفرة
                         </Text>
 
                         <Dropdown

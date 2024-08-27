@@ -271,14 +271,14 @@ export default function ChaletConfirm({ route, navigation }) {
                                     width: "90%",
                                     marginVertical: 5,
                                 }}>
-                                    {'عدد البالغين : من سن'} {item?.adultsAge} {'سنه'}
+                                    {'عدد الأشخاص : من سن'} {item?.adultsAge} {'سنه'}
                                 </Text>
                                 <TextInput
                                     onChangeText={(text) => setAdults(text)}
                                     onEndEditing={_handleArrivals}
                                     value={adults.toString()}
                                     keyboardType="numeric"
-                                    placeholder="أدخل عدد البالغين"
+                                    placeholder="أدخل عدد الأشخاص"
                                     style={{
                                         height: 50,
                                         backgroundColor: "#FFF",

@@ -18,6 +18,7 @@ import {
 } from "@expo/vector-icons";
 import { getCatigories, getSlider } from "../network";
 import { api } from "./../const/api";
+import AutoScrollingSlider from './../Components/AutoScrollingSlider';
 
 export default function HomePage({ route, navigation }) {
     const [cats, setCats] = useState([]);
@@ -143,37 +144,7 @@ export default function HomePage({ route, navigation }) {
                     }}>
                         أهلا بيكم في تطبيق الحجز السريع🎉
                     </Text>
-                    <ScrollView
-                        horizontal
-                        pagingEnabled
-                        style={{
-                            width: windowWidth,
-                            height: 180,
-                        }}>
-                        {slider.map((item) => {
-                            return (
-                                <View style={{
-                                    width: windowWidth,
-                                    alignItems: "center",
-                                    justifyContent: "center"
-                                }}>
-                                    <Image
-                                        source={{ uri: api.mediaURL + item.bannerName }}
-                                        resizeMode="cover"
-                                        onError={handleImageError}
-                                        style={{
-                                            width: windowWidth * 0.95,
-                                            height: 180,
-                                            borderRadius: 10
-                                        }}
-                                    />
-                                </View>
-                            )
-                        })
-                        }
-
-                    </ScrollView>
-
+                    <AutoScrollingSlider slider={slider} api={api} />
                     <View
                         style={{
                             flexDirection: "row-reverse",
