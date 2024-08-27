@@ -186,7 +186,7 @@ export default function ChaletConfirm({ route, navigation }) {
                                     width: "100%",
                                     marginVertical: 5
                                 }}>
-                                    رقم الهاتف
+                                    رقم الموبايل
                                 </Text>
                                 <TextInput
                                     placeholder="أدخل رقم الهاتف"
@@ -267,10 +267,11 @@ export default function ChaletConfirm({ route, navigation }) {
                                     fontFamily: "Bold",
                                     color: "#000",
                                     textAlign: "right",
+                                    fontSize: 11,
                                     width: "90%",
                                     marginVertical: 5,
                                 }}>
-                                    عدد البالغين
+                                    {'عدد البالغين : من سن'} {item?.adultsAge} {'سنه'}
                                 </Text>
                                 <TextInput
                                     onChangeText={(text) => setAdults(text)}

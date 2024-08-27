@@ -99,7 +99,7 @@ export default function Offers({ route, navigation }) {
                                         fontFamily: 'Bold',
                                         width: '100%',
                                         textAlign: 'right'
-                                    }}>{moment(item.offerDate).format("MM-DD-YYYY")}</Text>
+                                    }}>{moment(item.offerDate).format("YYYY-MM-DD")}</Text>
                                 </View>
 
 

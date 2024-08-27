@@ -238,7 +238,7 @@ export default function ChaletResult({ route, navigation }) {
 
                     <TextInput
                         onChangeText={(text) => filterChaletsByName(text)}
-                        placeholder={'البحث باسم المزرعه'}
+                        placeholder={'البحث باسم المزرعة'}
                         value={serachText}
                         style={{
                             width: '80%',
@@ -273,9 +273,9 @@ export default function ChaletResult({ route, navigation }) {
                         fontFamily: 'Regular',
                         fontSize: 12
                     }}>
-                        الاعلى سعرا
+                        الأعلي سعرا
                     </Text>
-                    <Ionicons name="caret-down" size={16} color="#FFF" />
+                    <Ionicons name="caret-up" size={16} color="#FFF" />
 
                 </TouchableOpacity>
 
@@ -297,9 +297,9 @@ export default function ChaletResult({ route, navigation }) {
                         fontFamily: 'Regular',
                         fontSize: 12
                     }}>
-                        سعرا
+                        الأقل سعرا
                     </Text>
-                    <Ionicons name="caret-up" size={16} color="#FFF" />
+                    <Ionicons name="caret-down" size={16} color="#FFF" />
 
                 </TouchableOpacity>
             </View>
@@ -376,7 +376,7 @@ export default function ChaletResult({ route, navigation }) {
                                         color: "#FFF",
                                         fontSize: 12,
                                     }}>
-                                        {`${'الشخص المحسوب من: '} ${item.adultsAge} ${' سنه '}`}                                    </Text>
+                                        {`${'الشخص المحسوب من: '} ${item.adultsAge} ${' سنة '}`}                                    </Text>
                                 </View>
                             </View>
 
@@ -635,7 +635,7 @@ export default function ChaletResult({ route, navigation }) {
                                             color: "#34ace0",
                                             marginVertical: 1
                                         }}>
-                                            فيشه + منضده
+                                            فيشة + منضدة
                                         </Text>
                                         <MaterialIcons name="table-restaurant" size={24} color="#586261" />
 
@@ -771,7 +771,7 @@ export default function ChaletResult({ route, navigation }) {
                                     fontFamily: "Bold",
                                     color: "#FFF"
                                 }}>
-                                    إحجــز الأن
+                                    إرسل طلب
                                 </Text>
 
                                 <AntDesign name="shoppingcart" size={26} color="#FFF" />

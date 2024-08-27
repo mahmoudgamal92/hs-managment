@@ -5,7 +5,8 @@ import {
     StatusBar,
     TouchableOpacity,
     ActivityIndicator,
-    ScrollView
+    ScrollView,
+    Modal
 } from "react-native";
 import {
     Feather,
@@ -30,7 +31,7 @@ export default function Chalets({ route, navigation }) {
     const [startDate, setStartDate] = useState(`${currentMonth}-${currentDay}-${currentYear}`);
     const [endDate, setEndDate] = useState("");
     const [cityID, setCityID] = useState("");
-    const [offerType, setOfferType] = useState(1);
+    const [offerType, setOfferType] = useState(1.1);
     const [IsOneDay, setIsOneDay] = useState(false);
 
     const _handleOfferTypePress = (id) => {
@@ -81,8 +82,8 @@ export default function Chalets({ route, navigation }) {
     };
 
     const _getChalestByCity = async (city) => {
+        setLoading(true);
         const chalets = await getChaletsByCity(city);
-
         if (Array.isArray(chalets)) {
             chalets.length > 0 ? navigation.navigate("ChaletsAndFarmsNewList", {
                 chalets: chalets,
@@ -91,6 +92,7 @@ export default function Chalets({ route, navigation }) {
         else {
             alert('لا توجد عروض في هذه المدينه');
         }
+        setLoading(false);
         console.log(chalets);
     }
 
@@ -152,8 +154,8 @@ export default function Chalets({ route, navigation }) {
 
 
 
-            console.log("Params =>>>>>>>>>>>>>>>>>>>>");
-            console.log(params);
+            // console.log("Params =>>>>>>>>>>>>>>>>>>>>");
+            // console.log(params);
 
 
             // Handle Request :
@@ -200,6 +202,23 @@ export default function Chalets({ route, navigation }) {
                     <Feather name="arrow-right" size={24} color="#FFF" />
                 </TouchableOpacity>
             </View>
+
+
+            <Modal
+                transparent={true}
+                animationType="fade"
+                visible={loading}
+                onRequestClose={() => setLoading(false)}
+            >
+                <View style={styles.overlay}>
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator size="large" color="#34ace0" />
+                        <Text style={styles.loadingText}>
+                            جاري التحميل ..
+                        </Text>
+                    </View>
+                </View>
+            </Modal>
             <ScrollView>
                 <View style={{
                     paddingHorizontal: 20,

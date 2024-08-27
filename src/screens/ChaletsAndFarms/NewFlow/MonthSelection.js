@@ -20,7 +20,7 @@ export default function HotelConfirm({ route, navigation }) {
     const months = Array.from({ length: 12 }, (_, i) => {
         const currentMonth = startMonth.clone().add(i, 'months');
         return {
-            name: `الشهر ${currentMonth.month() + 1}`,
+            name: `الشهر ${currentMonth.month() + 1} - ${currentMonth.format("YYYY")}`, // Month name with year
             startDate: currentMonth.format("MM-DD-YYYY"),
             endDate: currentMonth.endOf('month').format("MM-DD-YYYY")
         };

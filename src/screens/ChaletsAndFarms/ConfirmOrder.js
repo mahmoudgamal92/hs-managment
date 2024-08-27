@@ -71,7 +71,7 @@ export default function HotelConfirm({ route, navigation }) {
         formData.append('account', '1');
 
         try {
-            const response = await axios.post('http://api.4whatsapp.com/api/Agent_Client_', formData, {
+            const response = await axios.post('https://api2.4whatsapp.com/api/Agent_Client_', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

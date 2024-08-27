@@ -17,6 +17,23 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         paddingBottom: 5
     },
+    overlay: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    loadingContainer: {
+        padding: 20,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        alignItems: 'center',
+    },
+    loadingText: {
+        marginTop: 10,
+        fontSize: 16,
+        color: '#333',
+    },
     cats: {
         flexDirection: "row",
         marginVertical: 20

@@ -299,7 +299,16 @@ export default function ChaletResult({ route, navigation }) {
                                         }}>
                                             {`${'الشخص المحسوب من: '} ${item.adultsAge} ${' سنه '}`}
                                         </Text>
+
                                     </View>
+
+                                    <Text style={{
+                                        fontFamily: "Regular",
+                                        textAlign: 'center'
+                                    }}>
+                                        السعر لحد {item.adultsNumber} شخص
+                                    </Text>
+
                                 </View>
 
                             </View>
@@ -641,9 +650,10 @@ export default function ChaletResult({ route, navigation }) {
                                     <Text style={{
                                         fontFamily: "Bold",
                                         color: "#FFF",
-                                        fontSize: 12
+                                        fontSize: 10
+
                                     }}>
-                                        عرض الحجوزات المتاحه
+                                        كل الحجوزات المتوفرة
                                     </Text>
 
                                     <AntDesign name="shoppingcart" size={26} color="#FFF" />
@@ -664,13 +674,15 @@ export default function ChaletResult({ route, navigation }) {
                                         paddingVertical: 5,
                                         paddingHorizontal: 10,
                                         marginTop: 10,
-                                        height: 40
+                                        height: 40,
                                     }}>
                                     <Text style={{
                                         fontFamily: "Bold",
-                                        color: "#FFF"
+                                        color: "#FFF",
+                                        fontSize: 10
+
                                     }}>
-                                        التفاصيل
+                                        التفاصيل والأوقات
                                     </Text>
 
 
@@ -692,7 +704,9 @@ export default function ChaletResult({ route, navigation }) {
                                     }}>
                                     <Text style={{
                                         fontFamily: "Bold",
-                                        color: "#FFF"
+                                        color: "#FFF",
+                                        fontSize: 10
+
                                     }}>
                                         اللوكيشن
                                     </Text>
