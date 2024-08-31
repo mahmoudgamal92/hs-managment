@@ -2,8 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Splash from "./../screens/Splash";
 
-
-
+import VersionUpgrade from "./../screens/VersionUpgrade";
 import Home from "../screens/Index";
 
 
@@ -42,7 +41,6 @@ import NewChaletsAndFarmsConfirm from "./../screens/ChaletsAndFarms/NewFlow/Conf
 
 
 
-
 export default AppStack = () => {
     const HomeStack = createStackNavigator();
     return (
@@ -55,7 +53,7 @@ export default AppStack = () => {
             <HomeStack.Screen name="Splash" component={Splash} />
 
             <HomeStack.Screen name="TabNavigator" component={Home} />
-
+            <HomeStack.Screen name="VersionUpgrade" component={VersionUpgrade} />
             {/* Hotels Section */}
             <HomeStack.Screen name="Hotels" component={Hotels} />
             <HomeStack.Screen name="HotelResult" component={HotelResult} />

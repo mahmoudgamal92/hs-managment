@@ -7,9 +7,8 @@ import {
     ActivityIndicator,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { sendHotelRequest } from '../../network';
+import { sendHotelRequest, sendWhatsappMsg } from '../../network';
 import Constants from 'expo-constants';
-
 export default function HotelConfirm({ route, navigation }) {
     const { hotel, room, filters, reservation } = route.params;
     const [loading, setLoading] = useState(false);
@@ -27,14 +26,46 @@ export default function HotelConfirm({ route, navigation }) {
         KidsNumber: filters?.KidsNumber,
         TotalPrice: reservation?.total
     }
+
+
     const _placeOrder = async () => {
         setLoading(true);
-        const response = await sendHotelRequest(params);
-        console.log(response);
-        setLoading(false);
-        alert("تم إضافة طبلك بنجاح");
-        navigation.replace("TabNavigator");
-    }
+        try {
+            const response = await sendHotelRequest(params);
+
+            if (response.success) {
+                const userName = response.data.userName;
+                const linkUrl = response.data.linkUrl;
+                const phoneNumber = response.data.phoneNumber;
+
+                let msg = `\u202B
+                السلام عليكم ورحمه الله وبركاته
+                
+                السيد المحترم / ${userName}
+                
+                لديك طلب جديد، الرجاء الضغط على هذا الرابط لمشاهدة التفاصيل:
+                ${linkUrl}
+                
+                مع تحيات إدارة تطبيق الحجز السريع بالعراق
+                \u202C`;
+
+                await sendWhatsappMsg(phoneNumber, msg);
+                setLoading(false)
+                alert("تم إضافة طلبك بنجاح");
+                navigation.replace("TabNavigator");
+                console.log(response);
+            } else {
+                console.log(response);
+                alert("حدث خطأ أثناء إضافة الطلب.");
+            }
+        } catch (error) {
+            console.error('Error placing order:', error);
+            alert("حدث خطأ أثناء إضافة الطلب.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
     return (
         <View style={{

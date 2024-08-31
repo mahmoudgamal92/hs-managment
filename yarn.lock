@@ -2728,6 +2728,13 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
+config@^3.2.0:
+  version "3.3.12"
+  resolved "https://registry.yarnpkg.com/config/-/config-3.3.12.tgz#a10ae66efcc3e48c1879fbb657c86c4ef6c7b25e"
+  integrity sha512-Vmx389R/QVM3foxqBzXO8t2tUikYZP64Q6vQxGrsMpREeJc/aWRnPRERXWsYzOHAumx/AOoILWe6nU3ZJL+6Sw==
+  dependencies:
+    json5 "^2.2.3"
+
 connect@^3.6.5, connect@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/connect/-/connect-3.7.0.tgz#5d49348910caa5e07a01800b030d0c35f20484f8"
@@ -3271,6 +3278,11 @@ execa@^5.0.0, execa@^5.1.1:
     signal-exit "^3.0.3"
     strip-final-newline "^2.0.0"
 
+expo-application@~5.9.1:
+  version "5.9.1"
+  resolved "https://registry.yarnpkg.com/expo-application/-/expo-application-5.9.1.tgz#a12e0cf2741b6f084cc49cd0121ad0a70c770459"
+  integrity sha512-uAfLBNZNahnDZLRU41ZFmNSKtetHUT9Ua557/q189ua0AWV7pQjoVAx49E4953feuvqc9swtU3ScZ/hN1XO/FQ==
+
 expo-asset@~10.0.9:
   version "10.0.9"
   resolved "https://registry.yarnpkg.com/expo-asset/-/expo-asset-10.0.9.tgz#cf765b785f3d37b905520c0903172781142f8cbe"
@@ -3279,6 +3291,13 @@ expo-asset@~10.0.9:
     expo-constants "~16.0.0"
     invariant "^2.2.4"
     md5-file "^3.2.3"
+
+expo-config@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/expo-config/-/expo-config-1.0.0.tgz#71b3d61cb2223917a0dd90a4964f578f9df2ff19"
+  integrity sha512-hHPk01bSkU7/qsnz1vpJctGe9TvwEhnOCIx/0MmJGwhXmwTrbfhIJDqq3xI1Tw576vxuacpdCsTOnmuzoxo9cA==
+  dependencies:
+    config "^3.2.0"
 
 expo-constants@~16.0.0, expo-constants@~16.0.1:
   version "16.0.2"

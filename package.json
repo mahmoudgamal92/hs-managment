@@ -1,6 +1,6 @@
 {
   "name": "reserv",
-  "version": "1.0.1",
+  "version": "3",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -25,6 +25,8 @@
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "expo": "^51.0.0",
+    "expo-application": "~5.9.1",
+    "expo-config": "^1.0.0",
     "expo-constants": "~16.0.1",
     "expo-image": "~1.12.12",
     "expo-status-bar": "~1.12.1",

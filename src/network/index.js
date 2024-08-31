@@ -164,7 +164,7 @@ export const sendHotelRequest = async (params) => {
 
         const url = `https://services.alhajz-alsarea.com/api/Reservation/SaveHotelRequest?CategoryId=${params.CategoryId}&HotelId=${params.HotelId}&DateFrom=${params.DateFrom}&DateTo=${params.DateTo}&RoomAvailableID=${params.roomAvailableID}&RoomNumber=${params.RoomNumber}&ApplicantName=${params.ApplicantName}&ApplicantMobileNumber=${params.ApplicantMobileNumber}&Arrivals=1&AdultsNumber=${params.AdultsNumber}&KidsNumber=${params.KidsNumber}&TotalPrice=${params.TotalPrice}`;
 
-
+        console.log(url)
         const response = await axiosInstance.post(url, data, {
             headers: headers
         });
@@ -180,6 +180,36 @@ export const sendHotelRequest = async (params) => {
     } catch (error) {
         console.log('There has been a problem with your fetch operation: ' + error);
         throw error;
+    }
+};
+
+
+export const sendWhatsappMsg = async (recipient, message) => {
+    const formData = new FormData();
+    formData.append('Token', '793312044');
+    formData.append('Phones', '+9647824846025');
+    formData.append('recipient', recipient);
+    formData.append('Doctype', 'text');
+    formData.append('Message', message);
+    formData.append('account', '1');
+
+    try {
+        const response = await axios.post('https://api2.4whatsapp.com/api/Agent_Client_', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        console.log('Response status:', response.status);
+        console.log('Response data:', response.data);
+    } catch (error) {
+        if (error.response) {
+            console.log('Error status:', error.response.status);
+            console.log('Error data:', error.response.data);
+        } else if (error.request) {
+            console.log('No response received:', error.request);
+        } else {
+            console.log('Error:', error.message);
+        }
     }
 };
 

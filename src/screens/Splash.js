@@ -1,16 +1,65 @@
 import { View, Text, ActivityIndicator, Image } from 'react-native'
-import React, { useEffect } from 'react';
-import {
-    FontAwesome,
+import React, { useEffect, useState } from 'react';
+import * as Application from 'expo-application';
 
-} from "@expo/vector-icons";
+import Constants from 'expo-constants';
+
+
 export default function Splash({ route, navigation }) {
+    const [loading, setLoading] = useState(false);
+
+
+    const getVersion = async () => {
+        if (Constants.appOwnership === 'expo') {
+            return require('./../../package.json').version;
+        }
+        return Application.nativeBuildVersion;
+    };
+
+
 
     useEffect(() => {
-        setTimeout(() => {
-            navigation.replace('TabNavigator');
-        }, 1000);
+        _retrieveData();
     }, []);
+
+    const _retrieveData = async () => {
+        try {
+            const currentVersion = await getVersion();
+            fetch('http://mestamal.com/dashboard/api_mobile/version.php',
+                {
+                    method: "GET",
+                    headers: {
+                        Accept: "*/*",
+                        "cache-control": "no-cache",
+                        "Content-type": "multipart/form-data;",
+                        "Accept-Encoding": "gzip, deflate, br",
+                        Connection: "keep-alive",
+                    }
+                }
+            )
+                .then(response => response.json())
+                .then(json => {
+                    if (json.success === true) {
+                        if (parseInt(json.version) > parseInt(currentVersion)) {
+                            console.log(json.version);
+                            console.log(currentVersion);
+                            navigation.replace('VersionUpgrade');
+                        }
+                        else {
+                            navigation.replace('TabNavigator');
+                        }
+                    } else {
+                        //navigation.replace('TabNavigator');
+                    }
+                })
+                .finally(() => setLoading(false))
+                .catch(error => console.error(error));
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <View style={{
             alignItems: "center",

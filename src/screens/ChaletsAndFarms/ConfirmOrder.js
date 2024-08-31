@@ -9,7 +9,7 @@ import {
     ScrollView
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { sendChaletRequest } from '../../network';
+import { sendChaletRequest, sendWhatsappMsg } from '../../network';
 import { ArrivalTypes } from "../../const/api";
 import Constants from 'expo-constants';
 import axios from 'axios';
@@ -61,34 +61,6 @@ export default function HotelConfirm({ route, navigation }) {
         TotalPrice: orderTotalPrice
     }
 
-    const sendWhatsappMsg = async (recipient, message) => {
-        const formData = new FormData();
-        formData.append('Token', '793312044');
-        formData.append('Phones', '+9647824846025');
-        formData.append('recipient', recipient);
-        formData.append('Doctype', 'text');
-        formData.append('Message', message);
-        formData.append('account', '1');
-
-        try {
-            const response = await axios.post('https://api2.4whatsapp.com/api/Agent_Client_', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            console.log('Response status:', response.status);
-            console.log('Response data:', response.data);
-        } catch (error) {
-            if (error.response) {
-                console.log('Error status:', error.response.status);
-                console.log('Error data:', error.response.data);
-            } else if (error.request) {
-                console.log('No response received:', error.request);
-            } else {
-                console.log('Error:', error.message);
-            }
-        }
-    };
 
 
     const _placeOrder = async () => {
