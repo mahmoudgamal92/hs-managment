@@ -262,8 +262,7 @@ export default function HotelResult({ route, navigation }) {
                             style={{
                                 fontFamily: "Bold",
                                 textAlign: "right",
-                                color: "#000",
-                                color: "#000",
+                                color: "red",
                                 width: "100%",
                                 marginVertical: 20
                             }}>
@@ -401,7 +400,7 @@ export default function HotelResult({ route, navigation }) {
                                     fontFamily: "Bold",
                                     color: "#000"
                                 }}>
-                                    {parseInt(total_price)} د.ع
+                                    {parseInt(total_price)} الف
                                 </Text>
                             </View>
                             <TouchableOpacity
@@ -420,7 +419,7 @@ export default function HotelResult({ route, navigation }) {
                                     fontFamily: "Bold",
                                     color: "#FFF"
                                 }}>
-                                    احجز الأن
+                                    إرسل طلب
                                 </Text>
                             </TouchableOpacity>
                         </View>

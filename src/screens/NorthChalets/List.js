@@ -178,13 +178,15 @@ export default function ChaletResult({ route, navigation }) {
                                     width: "50%"
                                 }}>
                                     <Text style={{
-                                        fontFamily: "Bold"
+                                        fontFamily: "Bold",
+                                        textAlign: 'right'
                                     }}>
                                         {item.chaletName}
                                     </Text>
                                     <Text style={{
                                         fontFamily: "Regular",
-                                        color: "#00AA76"
+                                        color: "#00AA76",
+                                        textAlign: 'right'
                                     }}>
                                         نوع الحجز : {item.offerTypeName}
                                     </Text>
@@ -197,17 +199,24 @@ export default function ChaletResult({ route, navigation }) {
 
 
                                     <View style={{
-                                        backgroundColor: "#34ace0",
-                                        padding: 5,
-                                        borderRadius: 5
+                                        flexDirection: 'row-reverse',
+                                        paddingTop: 5
                                     }}>
                                         <Text style={{
                                             fontFamily: "Regular"
                                         }}>
-                                            السعر لحد {item.adultsNumber} بالغ : {item.price} د.ع
+                                            السعر لحد {item.adultsNumber} شخص :
+                                        </Text>
+
+                                        <Text style={{
+                                            backgroundColor: 'red',
+                                            color: '#FFF',
+                                            fontFamily: "Regular",
+                                            padding: 1, borderRadius: 5
+                                        }}>
+                                            {' '}{item.price} الف{' '}
                                         </Text>
                                     </View>
-
                                 </View>
 
                             </View>
@@ -632,7 +641,7 @@ export default function ChaletResult({ route, navigation }) {
                                         fontFamily: "Bold",
                                         color: "#FFF"
                                     }}>
-                                        إحجــز الأن
+                                        إرسل طلب
                                     </Text>
 
                                     <AntDesign name="shoppingcart" size={26} color="#FFF" />

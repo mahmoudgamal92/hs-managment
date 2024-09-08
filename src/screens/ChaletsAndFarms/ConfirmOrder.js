@@ -83,7 +83,8 @@ export default function HotelConfirm({ route, navigation }) {
                 
                 مع تحيات إدارة تطبيق الحجز السريع بالعراق
                 \u202C`;
-
+                // console.log(phoneNumber);
+                // console.log(msg);
                 await sendWhatsappMsg(phoneNumber, msg);
                 setLoading(false)
                 alert("تم إضافة طلبك بنجاح");

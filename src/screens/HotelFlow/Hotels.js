@@ -9,11 +9,13 @@ import {
     Platform,
     Dimensions,
     ScrollView,
-    Linking
+    Linking,
+    useWindowDimensions
 } from "react-native";
 import React, { useState, useRef, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
 import Modal from "react-native-modal";
+import RenderHtml from 'react-native-render-html';
 
 import {
     MaterialIcons,
@@ -29,6 +31,10 @@ export default function HotelResult({ route, navigation }) {
     const [modalTitle, setModalTitle] = useState("");
     const [modalContent, setModalContent] = useState("");
     const [modalImages, setModalImages] = useState([]);
+    const [detailsModalVisible, setDetailsModalVisible] = useState(false);
+    const [hotelDescription, setHotelDescription] = useState("");
+    const { width } = useWindowDimensions();
+
     return (
         <View style={styles.container}>
             <StatusBar translucent backgroundColor="#34ace0" />
@@ -132,6 +138,50 @@ export default function HotelResult({ route, navigation }) {
             </Modal>
 
 
+            <Modal
+                isVisible={detailsModalVisible}
+                style={{
+                    //maxHeight: 200,
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
+                <View style={{
+                    backgroundColor: "#FFF",
+                    width: "100%",
+                    borderRadius: 20,
+                    padding: 10,
+                    height: 600
+                }}>
+
+                    <View style={{
+                        borderBottomColor: "#DDDDDD",
+                        borderBottomWidth: 1,
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between"
+                    }}>
+                        <TouchableOpacity
+
+                            onPress={() => setDetailsModalVisible(false)}>
+                            <AntDesign name="close" size={24} color="#586261" />
+                        </TouchableOpacity>
+
+                        <Text style={{
+                            fontFamily: "Bold",
+                            padding: 5
+                        }}>
+                            التفاصيل
+                        </Text>
+
+
+                    </View>
+                    <RenderHtml
+                        contentWidth={width * 0.9}
+                        source={{ html: hotelDescription }}
+                    />
+                </View>
+            </Modal>
+
             <View
                 style={{
                     width: "100%",
@@ -200,11 +250,24 @@ export default function HotelResult({ route, navigation }) {
                                 </View>
 
 
-                                <View>
+
+                                <View style={{
+                                    flexDirection: 'row-reverse',
+                                    paddingTop: 5
+                                }}>
                                     <Text style={{
                                         fontFamily: "Regular"
                                     }}>
-                                        السعر يبدأ من {item.fromPrice} د.ع
+                                        السعر يبدأ من :
+                                    </Text>
+
+                                    <Text style={{
+                                        backgroundColor: 'red',
+                                        color: '#FFF',
+                                        fontFamily: "Regular",
+                                        padding: 1, borderRadius: 5
+                                    }}>
+                                        {' '}{item.fromPrice} الف{' '}
                                     </Text>
                                 </View>
 
@@ -365,19 +428,41 @@ export default function HotelResult({ route, navigation }) {
                                         alignItems: "center",
                                         borderRadius: 10,
                                         paddingVertical: 10,
-                                        paddingHorizontal: 20
+                                        paddingHorizontal: 10
                                     }}>
                                     <Text style={{
                                         fontFamily: "Bold",
                                         color: "#FFF"
                                     }}>
-                                        إحجز الأن
+                                        إرسل طلب
                                     </Text>
 
                                     <AntDesign name="shoppingcart" size={24} color="#FFF" />
 
                                 </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setHotelDescription(item.description)
+                                        setDetailsModalVisible(true)
+                                    }}
+                                    style={{
+                                        backgroundColor: "#34ace0",
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        borderRadius: 10,
+                                        paddingVertical: 10,
+                                        paddingHorizontal: 10
+                                    }}>
+                                    <Text style={{
+                                        fontFamily: "Bold",
+                                        color: "#FFF"
+                                    }}>
+                                        التفاصيل
+                                    </Text>
 
+
+                                </TouchableOpacity>
 
                                 <TouchableOpacity
 
@@ -388,7 +473,7 @@ export default function HotelResult({ route, navigation }) {
                                         alignItems: "center",
                                         borderRadius: 10,
                                         paddingVertical: 10,
-                                        paddingHorizontal: 20
+                                        paddingHorizontal: 10
                                     }}>
                                     <Text style={{
                                         fontFamily: "Bold",

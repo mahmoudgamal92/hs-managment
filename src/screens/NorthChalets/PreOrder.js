@@ -219,7 +219,8 @@ export default function ChaletConfirm({ route, navigation }) {
                                     color: "#000",
                                     textAlign: "right",
                                     width: "100%",
-                                    marginVertical: 5
+                                    marginVertical: 5,
+
                                 }}>
                                     الأشخاص القادمون
                                 </Text>
@@ -269,8 +270,9 @@ export default function ChaletConfirm({ route, navigation }) {
                                     textAlign: "right",
                                     width: "90%",
                                     marginVertical: 5,
+                                    fontSize: 11
                                 }}>
-                                    عدد البالغين
+                                    {'عدد الأشخاص : من سن'} {item?.adultsAge} {'سنه'}
                                 </Text>
                                 <TextInput
                                     onChangeText={(text) => setAdults(text)}

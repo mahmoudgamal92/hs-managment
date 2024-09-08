@@ -2,7 +2,7 @@
   "expo": {
     "name": "Fast Reservation",
     "slug": "fast_reserv",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -15,7 +15,7 @@
       "**/*"
     ],
     "ios": {
-      "buildNumber": "3",
+      "buildNumber": "4",
       "supportsTablet": false,
       "bundleIdentifier": "com.quickbookingiraq.bluemedia",
       "infoPlist": {
@@ -43,7 +43,7 @@
       }
     },
     "android": {
-      "versionCode": "3",
+      "versionCode": "4",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#34ace0"
