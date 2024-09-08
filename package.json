@@ -1,6 +1,6 @@
 {
   "name": "reserv",
-  "version": "4",
+  "version": "5",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",

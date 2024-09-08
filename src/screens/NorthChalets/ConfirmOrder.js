@@ -6,18 +6,18 @@ import {
     StatusBar,
     TouchableOpacity,
     ActivityIndicator,
-    ScrollView
+    ScrollView,
+    Modal
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { sendChaletRequest, sendWhatsappMsg } from '../../network';
 import { ArrivalTypes } from "../../const/api";
 import Constants from 'expo-constants';
+import styles from "./../../theme/style";
 
 export default function HotelConfirm({ route, navigation }) {
     const { order_info, chalet, filters } = route.params;
     const [loading, setLoading] = useState(false);
-
-
 
     function parseDate(dateString) {
         const parts = dateString.split('-');
@@ -109,7 +109,21 @@ export default function HotelConfirm({ route, navigation }) {
             flex: 1
         }}>
             <StatusBar barStyle="default" backgroundColor="#34ace0" />
-
+            <Modal
+                transparent={true}
+                animationType="fade"
+                visible={loading}
+                onRequestClose={() => setLoading(false)}
+            >
+                <View style={styles.overlay}>
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator size="large" color="#34ace0" />
+                        <Text style={styles.loadingText}>
+                            جار إرسال طلبك الرجاء الإنتظار  لحين الإكتمال ...
+                        </Text>
+                    </View>
+                </View>
+            </Modal>
             <View
                 style={{
                     width: "100%",
@@ -403,18 +417,13 @@ export default function HotelConfirm({ route, navigation }) {
                             marginTop: 20,
                             marginBottom: 100
                         }}>
-
-                        {loading == true ?
-                            <ActivityIndicator size={40} color={"#FFF"} />
-                            :
-                            <Text style={{
-                                textAlign: "center",
-                                fontFamily: "Bold",
-                                color: "#FFF"
-                            }}>
-                                تأكيد الطلب
-                            </Text>
-                        }
+                        <Text style={{
+                            textAlign: "center",
+                            fontFamily: "Bold",
+                            color: "#FFF"
+                        }}>
+                            أضغط هنا لإرسال الطلب
+                        </Text>
                     </TouchableOpacity>
                 </ScrollView>
             </View>

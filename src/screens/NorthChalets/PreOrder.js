@@ -30,6 +30,19 @@ export default function ChaletConfirm({ route, navigation }) {
     const [kids, setKids] = useState(0);
 
 
+
+    function toEnglishNumber(strNum) {
+        const arabicNumbers = "٠١٢٣٤٥٦٧٨٩".split("");
+        const englishNumbers = "0123456789".split("");
+        strNum = strNum.replace(
+            /[٠١٢٣٤٥٦٧٨٩]/g,
+            x => englishNumbers[arabicNumbers.indexOf(x)]
+        );
+        strNum = strNum.replace(/[^\d]/g, "");
+        return strNum;
+    }
+
+
     const _handleArrivals = async () => {
         const max_coming = parseInt(item.adultsNumber) + parseInt(item.personsNumber);
 
@@ -191,7 +204,7 @@ export default function ChaletConfirm({ route, navigation }) {
                                 <TextInput
                                     placeholder="أدخل رقم الهاتف"
                                     keyboardType="numeric"
-                                    onChangeText={(text) => setPhoneNumber(text)}
+                                    onChangeText={(text) => setPhoneNumber(toEnglishNumber(text))}
                                     style={{
                                         height: 50,
                                         backgroundColor: "#FFF",
@@ -275,7 +288,7 @@ export default function ChaletConfirm({ route, navigation }) {
                                     {'عدد الأشخاص : من سن'} {item?.adultsAge} {'سنه'}
                                 </Text>
                                 <TextInput
-                                    onChangeText={(text) => setAdults(text)}
+                                    onChangeText={(text) => setAdults(toEnglishNumber(text))}
                                     onEndEditing={_handleArrivals}
                                     value={adults.toString()}
                                     keyboardType="numeric"

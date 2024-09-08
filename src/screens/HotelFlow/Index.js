@@ -54,6 +54,20 @@ export default function Hotels({ route, navigation }) {
         return d1 < d2;
     }
 
+
+    function toEnglishNumber(strNum) {
+        const arabicNumbers = "٠١٢٣٤٥٦٧٨٩".split("");
+        const englishNumbers = "0123456789".split("");
+        strNum = strNum.replace(
+            /[٠١٢٣٤٥٦٧٨٩]/g,
+            x => englishNumbers[arabicNumbers.indexOf(x)]
+        );
+        strNum = strNum.replace(/[^\d]/g, "");
+        return strNum;
+    }
+
+
+
     const _applySearch = async () => {
         if (startDate === "" || endDate === "" || cityID === "" || KidsNumber === "" || AdultsNumber === "") {
             alert("لابد من إكمال البيانات بشكل صحيح");
@@ -236,7 +250,7 @@ export default function Hotels({ route, navigation }) {
 
                             <TextInput
                                 placeholder="فوق 4 سنوات"
-                                onChangeText={(num) => setAdultsNum(num)}
+                                onChangeText={(num) => setAdultsNum(toEnglishNumber(num))}
                                 keyboardType="numeric"
                                 placeholderTextColor={"red"}
                                 style={{
@@ -289,7 +303,7 @@ export default function Hotels({ route, navigation }) {
                                 placeholder="العمر من 0 ل 4 سنوات"
                                 keyboardType="numeric"
                                 placeholderTextColor={"red"}
-                                onChangeText={(num) => setKidsNumber(num)}
+                                onChangeText={(num) => setKidsNumber(toEnglishNumber(num))}
                                 style={{
                                     height: 50,
                                     backgroundColor: "#FFF",

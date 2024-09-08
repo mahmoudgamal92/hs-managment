@@ -5,10 +5,13 @@ import {
     StatusBar,
     TouchableOpacity,
     ActivityIndicator,
+    Modal
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { sendHotelRequest, sendWhatsappMsg } from '../../network';
 import Constants from 'expo-constants';
+import styles from "./../../theme/style";
+
 export default function HotelConfirm({ route, navigation }) {
     const { hotel, room, filters, reservation } = route.params;
     const [loading, setLoading] = useState(false);
@@ -73,7 +76,21 @@ export default function HotelConfirm({ route, navigation }) {
 
         }}>
             <StatusBar barStyle="default" backgroundColor="#34ace0" />
-
+            <Modal
+                transparent={true}
+                animationType="fade"
+                visible={loading}
+                onRequestClose={() => setLoading(false)}
+            >
+                <View style={styles.overlay}>
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator size="large" color="#34ace0" />
+                        <Text style={styles.loadingText}>
+                            جار إرسال طلبك الرجاء الإنتظار  لحين الإكتمال ...
+                        </Text>
+                    </View>
+                </View>
+            </Modal>
             <View
                 style={{
                     width: "100%",
@@ -294,17 +311,15 @@ export default function HotelConfirm({ route, navigation }) {
                         borderRadius: 10,
                         marginVertical: 20
                     }}>
-                    {loading == true ?
-                        <ActivityIndicator size={40} color={"#FFF"} />
-                        :
-                        <Text style={{
-                            textAlign: "center",
-                            fontFamily: "Bold",
-                            color: "#FFF"
-                        }}>
-                            تأكيد الطلب
-                        </Text>
-                    }
+
+                    <Text style={{
+                        textAlign: "center",
+                        fontFamily: "Bold",
+                        color: "#FFF"
+                    }}>
+                        أضغط هنا لإرسال الطلب
+                    </Text>
+
                 </TouchableOpacity>
             </View>
         </View>

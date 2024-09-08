@@ -6,7 +6,8 @@ import {
     StatusBar,
     TouchableOpacity,
     ActivityIndicator,
-    ScrollView
+    ScrollView,
+    Modal
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { sendChaletRequest, sendWhatsappMsg } from '../../network';
@@ -419,17 +420,14 @@ export default function HotelConfirm({ route, navigation }) {
                             marginTop: 20
                         }}>
 
-                        {loading == true ?
-                            <ActivityIndicator size={40} color={"#FFF"} />
-                            :
-                            <Text style={{
-                                textAlign: "center",
-                                fontFamily: "Bold",
-                                color: "#FFF"
-                            }}>
-                                أضغط هنا لإرسال الطلب
-                            </Text>
-                        }
+                        <ActivityIndicator size={40} color={"#FFF"} />
+                        <Text style={{
+                            textAlign: "center",
+                            fontFamily: "Bold",
+                            color: "#FFF"
+                        }}>
+                            أضغط هنا لإرسال الطلب
+                        </Text>
                     </TouchableOpacity>
                 </ScrollView>
             </View>

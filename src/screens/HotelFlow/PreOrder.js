@@ -33,6 +33,17 @@ export default function HotelPreOrder({ route, navigation }) {
         Arrivals: arrivals,
     }
 
+    function toEnglishNumber(strNum) {
+        const arabicNumbers = "٠١٢٣٤٥٦٧٨٩".split("");
+        const englishNumbers = "0123456789".split("");
+        strNum = strNum.replace(
+            /[٠١٢٣٤٥٦٧٨٩]/g,
+            x => englishNumbers[arabicNumbers.indexOf(x)]
+        );
+        strNum = strNum.replace(/[^\d]/g, "");
+        return strNum;
+    }
+
     const _proceedToCheckout = () => {
 
         if (fullName == "" || phoneNumber == "" || arrivals == 0) {
@@ -153,7 +164,7 @@ export default function HotelPreOrder({ route, navigation }) {
                         <TextInput
                             placeholder="أدخل رقم الهاتف"
                             keyboardType="numeric"
-                            onChangeText={(text) => setPhoneNumber(text)}
+                            onChangeText={(text) => setPhoneNumber(toEnglishNumber(text))}
                             style={{
                                 height: 50,
                                 backgroundColor: "#FFF",
