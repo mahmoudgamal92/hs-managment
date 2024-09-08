@@ -11,6 +11,8 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { sendChaletRequest } from './../../../network';
 import { ArrivalTypes } from "./../../../const/api";
+import styles from "../../../theme/style";
+
 import Constants from 'expo-constants';
 import axios from 'axios';
 import moment from "moment";
@@ -110,6 +112,25 @@ export default function HotelConfirm({ route, navigation }) {
             paddingTop: Constants.statusBarHeight,
         }}>
             <StatusBar barStyle="default" backgroundColor="#34ace0" />
+
+
+            <Modal
+                transparent={true}
+                animationType="fade"
+                visible={loading}
+                onRequestClose={() => setLoading(false)}>
+
+                <View style={styles.overlay}>
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator size="large" color="#34ace0" />
+                        <Text style={styles.loadingText}>
+                            جار إرسال طلبك الرجاء الإنتظار  لحين الإكتمال ...
+                        </Text>
+                    </View>
+                </View>
+
+            </Modal>
+
 
             <View
                 style={{

@@ -12,7 +12,7 @@ import { Feather } from "@expo/vector-icons";
 import { sendChaletRequest, sendWhatsappMsg } from '../../network';
 import { ArrivalTypes } from "../../const/api";
 import Constants from 'expo-constants';
-import axios from 'axios';
+import styles from "./../../theme/style";
 
 export default function HotelConfirm({ route, navigation }) {
     const { order_info, chalet, filters } = route.params;
@@ -87,7 +87,7 @@ export default function HotelConfirm({ route, navigation }) {
                 // console.log(msg);
                 await sendWhatsappMsg(phoneNumber, msg);
                 setLoading(false)
-                alert("تم إضافة طلبك بنجاح");
+                alert(" تم إرسال طلبك وسيتم التواصل معك بأقرب وقت");
                 navigation.replace("TabNavigator");
                 console.log(response);
             } else {
@@ -111,6 +111,21 @@ export default function HotelConfirm({ route, navigation }) {
         }}>
             <StatusBar barStyle="default" backgroundColor="#34ace0" />
 
+            <Modal
+                transparent={true}
+                animationType="fade"
+                visible={loading}
+                onRequestClose={() => setLoading(false)}
+            >
+                <View style={styles.overlay}>
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator size="large" color="#34ace0" />
+                        <Text style={styles.loadingText}>
+                            جار إرسال طلبك الرجاء الإنتظار  لحين الإكتمال ...
+                        </Text>
+                    </View>
+                </View>
+            </Modal>
             <View
                 style={{
                     width: "100%",
@@ -412,7 +427,7 @@ export default function HotelConfirm({ route, navigation }) {
                                 fontFamily: "Bold",
                                 color: "#FFF"
                             }}>
-                                ارسال الطلب
+                                أضغط هنا لإرسال الطلب
                             </Text>
                         }
                     </TouchableOpacity>
