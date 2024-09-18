@@ -25,7 +25,7 @@ export default function Splash({ route, navigation }) {
     const _retrieveData = async () => {
         try {
             const currentVersion = await getVersion();
-            fetch('http://mestamal.com/dashboard/api_mobile/version.php',
+            fetch('https://mestamal.com/dashboard/api_mobile/version.php',
                 {
                     method: "GET",
                     headers: {
