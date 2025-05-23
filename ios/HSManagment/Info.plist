@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>HS Managment</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>$(PRODUCT_NAME)</string>
+    <key>CFBundlePackageType</key>
+    <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.hs.managment</string>
+        </array>
+      </dict>
+    </array>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>12.0</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+      <key>NSExceptionDomains</key>
+      <dict>
+        <key>admin.alhajz-alsarea.com</key>
+        <dict>
+          <key>NSIncludesSubdomains</key>
+          <true/>
+          <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+          <true/>
+        </dict>
+      </dict>
+    </dict>
+    <key>NSCalendarsUsageDescription</key>
+    <string>This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>HS Managment App App requires access to your camera to let Capture Pictures to publish your Adds on HS Managment App </string>
+    <key>NSContactsUsageDescription</key>
+    <string>This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Your Location Is Used For Showing You The Nearest real estate items to you</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Your Location Is Used For Showing You The Nearest real estate items to you</string>
+    <key>NSLocationUsageDescription</key>
+    <string>Your Location Is Used For Showing You The Nearest real estate items to you</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Your Location Is Used For Showing You The Nearest real estate items to you</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.</string>
+    <key>NSMotionUsageDescription</key>
+    <string>This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>HS Managment App needs to access your camera roll so that you can upload Pictures to insert your items</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>HS Managment App needs to access your camera roll to enable you to choose Pictures for your items  </string>
+    <key>NSRemindersUsageDescription</key>
+    <string>This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.</string>
+    <key>UILaunchStoryboardName</key>
+    <string>SplashScreen</string>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+      <string>arm64</string>
+    </array>
+    <key>UIRequiresFullScreen</key>
+    <false/>
+    <key>UIStatusBarStyle</key>
+    <string>UIStatusBarStyleDefault</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UIUserInterfaceStyle</key>
+    <string>Automatic</string>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+  </dict>
+</plist>

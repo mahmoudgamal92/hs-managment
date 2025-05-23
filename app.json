@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Fast Reservation",
-    "slug": "fast_reserv",
-    "version": "1.0.5",
+    "name": "HS Managment",
+    "slug": "hs_managment",
+    "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/adaptive-icon.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFF"
     },
@@ -15,9 +15,9 @@
       "**/*"
     ],
     "ios": {
-      "buildNumber": "5",
+      "buildNumber": "1",
       "supportsTablet": false,
-      "bundleIdentifier": "com.quickbookingiraq.bluemedia",
+      "bundleIdentifier": "com.hs.managment",
       "infoPlist": {
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true,
@@ -28,9 +28,9 @@
             }
           }
         },
-        "NSCameraUsageDescription": "Fast Reservation App App requires access to your camera to let Capture Pictures to publish your Adds on Fast Reservation App ",
-        "NSPhotoLibraryUsageDescription": "Fast Reservation App needs to access your camera roll to enable you to choose Pictures for your items  ",
-        "NSPhotoLibraryAddUsageDescription": "Fast Reservation App needs to access your camera roll so that you can upload Pictures to insert your items",
+        "NSCameraUsageDescription": "HS Managment App App requires access to your camera to let Capture Pictures to publish your Adds on HS Managment App ",
+        "NSPhotoLibraryUsageDescription": "HS Managment App needs to access your camera roll to enable you to choose Pictures for your items  ",
+        "NSPhotoLibraryAddUsageDescription": "HS Managment App needs to access your camera roll so that you can upload Pictures to insert your items",
         "NSLocationWhenInUseUsageDescription": "Your Location Is Used For Showing You The Nearest real estate items to you",
         "NSLocationAlwaysUsageDescription": "Your Location Is Used For Showing You The Nearest real estate items to you",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "Your Location Is Used For Showing You The Nearest real estate items to you",
@@ -43,12 +43,12 @@
       }
     },
     "android": {
-      "versionCode": "5",
+      "versionCode": "1",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#34ace0"
+        "foregroundImage": "./assets/logo.png",
+        "backgroundColor": "#FFF"
       },
-      "package": "com.seyahaa.seyahaa"
+      "package": "com.hs.managment"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -58,8 +58,9 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "0a506747-aa12-4539-a6e8-dd6f9aee7010"
+        "projectId": "bdf424cd-40be-402f-aeaf-06db500339de"
       }
-    }
+    },
+    "owner": "mahmoud2391997"
   }
 }

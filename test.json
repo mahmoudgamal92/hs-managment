@@ -1,0 +1,47 @@
+console.error: Error response: {
+    "status": 400,
+    "data": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+        "title": "One or more validation errors occurred.",
+        "status": 400,
+        "errors": {
+            "UserId": [
+                "The UserId field is required."
+            ]
+        },
+        "traceId": "00-50f2e1344bc3f1472ee3c76056b95400-0385766e8ef11549-00"
+    },
+    "message": "Request failed with status code 400",
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "adapter": [
+            "xhr",
+            "http",
+            "fetch"
+        ],
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 10000,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {},
+        "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFsYWEgT3NhbWEiLCJyb2xlIjoiU3VwZXJB...(truncated)..."
+        },
+        "baseURL": "https://services.alhajz-alsarea.com/api",
+        "method": "get",
+        "url": "/Chalet/GetByUserId"
+    }
+}
