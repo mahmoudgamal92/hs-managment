@@ -1,1 +1,2 @@
-export * from './DashboardScreen/DashboardScreen';
+export * from './ReservationReportScreen/ReservationReportScreen';
+export * from './ReservationDeashboardScreen/ReservationDeashboardScreen';

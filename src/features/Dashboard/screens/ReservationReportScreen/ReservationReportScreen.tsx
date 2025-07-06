@@ -13,24 +13,25 @@ import {
 import { BaseLayout, DatePicker, Header, Slider } from '@components';
 import { useChalets } from "@features/Chalets/hooks/useChalets";
 import { Dropdown } from "react-native-element-dropdown";
-import { offerTypes, PRIVACY_URL } from "@constants";
+import { months, offerTypes, PRIVACY_URL } from "@constants";
 import { styles } from './styles';
 import { colors } from "@theme";
 import { useDashboard } from "@features/Dashboard/hooks";
 
-export const DashboardScreen = ({ route, navigation }) => {
+export const ReservationReportScreen = ({ route, navigation }) => {
     const currentYear = new Date().getFullYear().toString();
     const currentMonth = (new Date().getMonth() + 1).toString();
     const currentDay = new Date().getDate().toString();
     const [startDate, setStartDate] = useState(`${currentMonth}-${currentDay}-${currentYear}`);
+    const [endDate, setEndDate] = useState('');
+
     const [selectedChalet, setSelectedChalet] = useState('0');
     const [offerType, setOfferType] = useState(1);
-    const { getHomeBanner, getUserChalets, chalets, banners } = useDashboard();
+    const { getUserChalets, chalets, } = useDashboard();
 
     useEffect(() => {
-        getHomeBanner();
         getUserChalets();
-    }, [getHomeBanner, getUserChalets])
+    }, [getUserChalets])
 
     const { getAllOffers, loading } = useChalets(
         {
@@ -59,9 +60,9 @@ export const DashboardScreen = ({ route, navigation }) => {
         }
         const formData = {
             ChaletId: selectedChalet,
-            OfferType: offerType.toString(),
+            OfferType: offerType === 0 ? '' : offerType.toString(),
             FromDate: startDate,
-            ToDate: '',
+            ToDate: offerType === 0 ? endDate : '',
         }
         getAllOffers(formData);
     }
@@ -131,11 +132,22 @@ export const DashboardScreen = ({ route, navigation }) => {
 
                 </View>
             </View>
-            <View>
-                <Slider banners={banners} />
-            </View>
             <View style={{
-                paddingTop: 20,
+                paddingHorizontal: 20,
+                paddingVertical: 20
+            }}>
+                <Text style={{
+                    color: colors.BEIGE,
+                    fontFamily: "Bold",
+                    fontSize: 18,
+                    textAlign: 'right'
+
+                }}>
+                    هلا فيك بتطبيق اداره الحجوزات   👋👋
+                </Text>
+            </View>
+
+            <View style={{
                 paddingHorizontal: 30
             }}>
 
@@ -158,7 +170,7 @@ export const DashboardScreen = ({ route, navigation }) => {
                                     backgroundColor: offerType == parseFloat(item.id) ? colors.BEIGE : colors.WHITE,
                                     borderLeftColor: "#DDDDDD",
                                     borderLeftWidth: 1,
-                                    width: "33%"
+                                    width: "25%"
                                 }}>
 
                                 <Text style={{
@@ -203,17 +215,49 @@ export const DashboardScreen = ({ route, navigation }) => {
                     />
                 </View>
 
-                <View style={{
-                    paddingHorizontal: 5,
-                    paddingTop: 10,
-                }}>
-                    <DatePicker
-                        label={'حدد التاريخ'}
-                        onDateChange={handleStartDateChange}
-                        plus={0}
-                        dropdownPosition={"bottom"}
-                    />
-                </View>
+                {offerType === 0 ?
+
+                    <View style={{
+                        paddingTop: 10,
+                    }}>
+                        <Text style={{
+                            textAlign: 'right',
+                            fontFamily: 'Bold',
+                            fontSize: 16
+                        }}>
+                            حدد الشهر
+                        </Text>
+                        <Dropdown
+                            style={styles.dropdown}
+                            placeholderStyle={styles.placeholderStyle}
+                            selectedTextStyle={styles.selectedTextStyle}
+                            iconStyle={styles.iconStyle}
+                            itemTextStyle={{ fontFamily: "Regular", fontSize: 12 }}
+                            data={months}
+                            placeholder="اختر الشهر"
+                            maxHeight={300}
+                            labelField="monthArabic"
+                            valueField="monthNumber"
+                            onChange={(item) => {
+                                setStartDate(item.from);
+                                setEndDate(item.to);
+                            }
+                            }
+                        />
+                    </View>
+                    :
+                    <View style={{
+                        paddingHorizontal: 5,
+                        paddingTop: 10,
+                    }}>
+                        <DatePicker
+                            label={'حدد التاريخ'}
+                            onDateChange={handleStartDateChange}
+                            plus={0}
+                            dropdownPosition={"bottom"}
+                        />
+                    </View>
+                }
 
 
                 <TouchableOpacity

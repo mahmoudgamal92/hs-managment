@@ -1,0 +1,24 @@
+export type Reservation = {
+    id: number;
+    categoryId: number;
+    categoryName: string;
+    sourceId: number;
+    reservationTypeId: number;
+    sourceName: string;
+    sourceType: string;
+    isOneDay: boolean;
+    sourceOwner: string;
+    ownerId: string;
+    dateFrom: string;
+    dateTo: string;
+    applicantName: string;
+    applicantMobileNumber: string;
+    arrivals: number;
+    arrivalsType: string;
+    adultsNumber: number | null;
+    kidsNumber: number | null;
+    personsNumber: number | null;
+    requestStatus: number;
+    requestDate: string;
+    totalPrice: number;
+};

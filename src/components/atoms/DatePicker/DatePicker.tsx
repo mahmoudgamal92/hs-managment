@@ -126,10 +126,10 @@ export const DatePicker = (props: DatePickerProps) => {
                         value={selectedMonth}
                         placeholder="1"
                         maxHeight={300}
-                        labelField="title"
-                        valueField="title"
+                        labelField="monthNumber"
+                        valueField="monthNumber"
                         onChange={(item) => {
-                            handleMonthChange(parseInt(item.title).toString())
+                            //handleMonthChange(parseInt(item.monthNumber).toString())
                         }}
                     />
                 </View>

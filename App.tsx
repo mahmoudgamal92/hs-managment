@@ -6,6 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AppStack } from "./src/navigation/AppStack";
 import { Provider } from "react-redux";
 import { store } from "@redux";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { ConfirmationModal } from "@components/molecules/ConfirmationModal/ConfirmationModal";
 export default function App() {
   I18nManager.forceRTL(false);
   I18nManager.allowRTL(false);
@@ -30,6 +32,7 @@ export default function App() {
       <NavigationContainer>
         <AppStack />
       </NavigationContainer>
+      <ConfirmationModal />
     </Provider>
   );
 }

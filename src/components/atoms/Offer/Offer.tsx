@@ -11,28 +11,16 @@ type OfferProps = {
     reserveAvailable?: boolean;
     offerID: string;
     price: string;
-    onToggleReserve: (value: boolean) => void;
-    onPriceChange: (value: string) => void;
 };
 
 export const Offer = (props: OfferProps) => {
-    const { shifTitle, reserveAvailable, offerID, price, onToggleReserve, onPriceChange } = props;
+    const { shifTitle, reserveAvailable, offerID, price } = props;
 
     const [resrv, setReserv] = React.useState(reserveAvailable ?? false);
     const [localPrice, setLocalPrice] = React.useState(price);
 
-    const handleToggle = (isOn: boolean) => {
-        setReserv(isOn);
-        onToggleReserve(isOn);
-    };
-
-    const handlePriceChange = (value: string) => {
-        setLocalPrice(value);
-        onPriceChange(value);
-    };
-
     return (
-        <View style={{ padding: 20 }}>
+        <View style={{ paddingHorizontal: 20 }}>
             <View style={styles.offerContainer}>
                 <View style={{ flexDirection: 'row-reverse' }}>
                     <View style={{
@@ -44,7 +32,7 @@ export const Offer = (props: OfferProps) => {
                         <Text style={{
                             fontFamily: 'Bold',
                             color: colors.WHITE,
-                            fontSize: 16
+                            fontSize: 12
                         }}>
                             {shifTitle}
                         </Text>
@@ -60,33 +48,29 @@ export const Offer = (props: OfferProps) => {
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'flex-end',
-                        width: '50%'
+                        width: '60%',
+                        paddingTop: 10,
                     }}>
                         <ToggleSwitch
                             isOn={resrv}
                             onColor="green"
                             offColor="red"
                             label={resrv ? 'متاح للحجز' : 'غير متاح للحجز'}
-                            size="large"
-                            labelStyle={{ fontFamily: 'Bold' }}
-                            onToggle={handleToggle}
+                            size="medium"
+                            labelStyle={{ fontFamily: 'Bold', fontSize: 12 }}
+                            onToggle={() => { }
+                            }
                         />
                     </View>
 
                     <View style={{
-                        width: '50%',
+                        width: '40%',
                         alignItems: 'flex-end'
                     }}>
                         <Text style={{ fontFamily: 'Bold', fontSize: 16 }}>
-                            السعر :
+                            السعر : {localPrice}
                         </Text>
-                        <TextInput
-                            placeholder="أدخل السعر"
-                            keyboardType="number-pad"
-                            value={localPrice}
-                            onChangeText={handlePriceChange}
-                            style={styles.textInput}
-                        />
+
                     </View>
                 </View>
             </View>

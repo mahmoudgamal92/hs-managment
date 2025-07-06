@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GetUserChalets,GetBanner } from './../services';
+import { GetUserChalets } from './../services';
 
 export const useDashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -23,26 +23,11 @@ export const useDashboard = () => {
     [],
   );
 
-  const getHomeBanner = useCallback(
-    async () => {
-      setLoading(true);
-      const res = await GetBanner();
-
-      setLoading(false);
-      if (res.status !== 200) {
-        console.log('errrrrrrr');
-      }
-      setBanners(Array.isArray(res.data) ? res.data : []);
-    },
-    [],
-  );
-  
 
   return {
     loading,
     chalets,
     banners,
     getUserChalets,
-    getHomeBanner
   };
 };

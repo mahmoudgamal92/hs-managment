@@ -3,6 +3,10 @@ export const baseURL = "https://services.alhajz-alsarea.com/api";
 export const PRIVACY_URL = 'https://app.alhajz-alsarea.com/privacy.html';
 export const offerTypes = [
     {
+        id: "0",
+        title: "شهر كامل"
+    },
+    {
         id: "1",
         title: "يوم كامل"
     },
@@ -113,44 +117,83 @@ const days = [
     },
 ];
 
+
+
 const months = [
     {
-        title: "1",
+        monthNumber: '1',
+        monthArabic: "يناير",
+        from: "2025-01-01",
+        to: "2025-01-31"
     },
     {
-        title: "2",
+        monthNumber: '2',
+        monthArabic: "فبراير",
+        from: "2025-02-01",
+        to: "2025-02-28"
     },
     {
-        title: "3",
+        monthNumber: '3',
+        monthArabic: "مارس",
+        from: "2025-03-01",
+        to: "2025-03-31"
     },
     {
-        title: "4",
+        monthNumber: '4',
+        monthArabic: "أبريل",
+        from: "2025-04-01",
+        to: "2025-04-30"
     },
     {
-        title: "5",
+        monthNumber: '5',
+        monthArabic: "مايو",
+        from: "2025-05-01",
+        to: "2025-05-31"
     },
     {
-        title: "6",
+        monthNumber: '6',
+        monthArabic: "يونيو",
+        from: "2025-06-01",
+        to: "2025-06-30"
     },
     {
-        title: "7",
+        monthNumber: '7',
+        monthArabic: "يوليو",
+        from: "2025-07-01",
+        to: "2025-07-31"
     },
     {
-        title: "8",
+        monthNumber: '8',
+        monthArabic: "أغسطس",
+        from: "2025-08-01",
+        to: "2025-08-31"
     },
     {
-        title: "9",
+        monthNumber: '9',
+        monthArabic: "سبتمبر",
+        from: "2025-09-01",
+        to: "2025-09-30"
     },
     {
-        title: "10",
+        monthNumber: '10',
+        monthArabic: "أكتوبر",
+        from: "2025-10-01",
+        to: "2025-10-31"
     },
     {
-        title: "11",
+        monthNumber: '11',
+        monthArabic: "نوفمبر",
+        from: "2025-11-01",
+        to: "2025-11-30"
     },
     {
-        title: "12",
-    },
-];
+        monthNumber: '12',
+        monthArabic: "ديسمبر",
+        from: "2025-12-01",
+        to: "2025-12-31"
+    }
+]
+
 
 
 const year = [
