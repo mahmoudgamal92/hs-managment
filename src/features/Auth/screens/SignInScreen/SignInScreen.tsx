@@ -39,8 +39,8 @@ export const SignInScreen = ({ route, navigation }) => {
 
   //maitham_albaladawy@yahoo.com
   //P@ssw0rd
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(__DEV__ ? "maitham_albaladawy@yahoo.com" : "");
+  const [password, setPassword] = useState(__DEV__ ? "P@ssw0rd" : "");
   const [passwordVisible, setPasswordVisible] = useState(true);
 
 

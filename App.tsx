@@ -11,9 +11,10 @@ import { ConfirmationModal } from "@components/molecules/ConfirmationModal/Confi
 export default function App() {
   I18nManager.forceRTL(false);
   I18nManager.allowRTL(false);
-  if (__DEV__) {
-    require("./ReactotronConfig");
-  }
+
+  // if (__DEV__) {
+  //   require("./ReactotronConfig");
+  // }
   let [fontsLoaded] = useFonts({
     Bold: require("./src/assets/fonts/Bold.ttf"),
     Light: require("./src/assets/fonts/Light.ttf"),
@@ -25,7 +26,10 @@ export default function App() {
     return null;
   }
 
-
+  if ((Text as any).defaultProps == null) {
+    (Text as any).defaultProps = {};
+  }
+  (Text as any).defaultProps.allowFontScaling = false;
 
   return (
     <Provider store={store}>

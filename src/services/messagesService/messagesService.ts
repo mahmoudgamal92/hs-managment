@@ -1,10 +1,6 @@
 
 import axios from 'axios';
 
-import Constants from "expo-constants";
-
-const { API_URL, GOOGLE_MAPS_API_KEY } = Constants.expoConfig.extra;
-
 const rejectionMessage = `مرحبا بكم، نعتذر منكم تم رفض الطلب لأحد الأسباب التالية (١ -تم تثبيت الحجز مع صاحب طلب آخر قدم  قبلكم، ٢-الشاليه في حالة صيانة ، أسباب أخرى`;
 const acceptanceMessage = `مرحبا بكم ،  تم قبول طلب الحجز`;
 export const sendWhatsappMsg = async (recipient: string, type: string) => {

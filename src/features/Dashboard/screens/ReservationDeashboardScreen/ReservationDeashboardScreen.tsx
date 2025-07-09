@@ -18,7 +18,6 @@ import { colors } from "@theme";
 import { styles } from './styles';
 import { useReservations } from "@features/Dashboard/hooks/useReservations";
 import { useModal } from "@hooks/useModal";
-import { sendWhatsappMsg } from "@services";
 import { Reservation } from "@types";
 export const ReservationDeashboardScreen = ({ route, navigation }) => {
     const { reservations, getUserReservations, updateReservation, loading } = useReservations();

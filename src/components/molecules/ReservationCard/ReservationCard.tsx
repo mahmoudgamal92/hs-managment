@@ -43,21 +43,21 @@ export const ReservationCard: React.FC<Props> = (props) => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>معلومات الحجز</Text>
         <InfoRow label="التصنيف" value={reservation.categoryName} />
-        <InfoRow label="نوع الوصول" value={reservation.arrivalsType} />
+        <InfoRow label="القادمون" value={reservation.arrivalsType} />
         <InfoRow
           label="تاريخ الطلب"
           value={moment(reservation.requestDate).format('YYYY-MM-DD HH:mm')}
         />
         <InfoRow
-          label="من تاريخ"
+          label="تاريخ الوصول"
           value={moment(reservation.dateFrom).format('YYYY-MM-DD')}
         />
         <InfoRow
-          label="إلى تاريخ"
+          label="تاريخ المغادره"
           value={moment(reservation.dateTo).format('YYYY-MM-DD')}
         />
         <InfoRow label="ليلة واحدة" value={reservation.isOneDay ? 'نعم' : 'لا'} />
-        <InfoRow label="عدد الوصول" value={reservation.arrivals?.toString()} />
+        <InfoRow label="عدد الاشخاص" value={reservation.arrivals?.toString()} />
         <InfoRow label="حالة الطلب" value={getStatusText(reservation.requestStatus)} />
       </View>
 

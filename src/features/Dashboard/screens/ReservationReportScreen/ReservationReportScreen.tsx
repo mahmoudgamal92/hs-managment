@@ -254,7 +254,7 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                             label={'حدد التاريخ'}
                             onDateChange={handleStartDateChange}
                             plus={0}
-                            dropdownPosition={"bottom"}
+                            dropdownPosition={"top"}
                         />
                     </View>
                 }

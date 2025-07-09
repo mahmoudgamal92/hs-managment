@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
-import Checkbox from 'expo-checkbox';
 import { colors } from '@theme';
 import ToggleSwitch from 'toggle-switch-react-native';
 import { styles } from './styles';
@@ -10,14 +9,29 @@ type OfferProps = {
     shifTitle: string;
     reserveAvailable?: boolean;
     offerID: string;
+    editibile?: boolean;
     price: string;
+    onPriceChange?: (value: string) => void;
+    onToggleReserve?: (value: boolean) => void;
 };
 
 export const Offer = (props: OfferProps) => {
-    const { shifTitle, reserveAvailable, offerID, price } = props;
+    const { shifTitle, reserveAvailable, offerID, price, editibile, onPriceChange, onToggleReserve } = props;
 
     const [resrv, setReserv] = React.useState(reserveAvailable ?? false);
     const [localPrice, setLocalPrice] = React.useState(price);
+
+    const handlePriceChange = (value: string) => {
+        setLocalPrice(value);
+        onPriceChange(value);
+    };
+
+
+
+    const handleToggle = (isOn: boolean) => {
+        setReserv(isOn);
+        onToggleReserve(isOn);
+    };
 
     return (
         <View style={{ paddingHorizontal: 20 }}>
@@ -55,11 +69,10 @@ export const Offer = (props: OfferProps) => {
                             isOn={resrv}
                             onColor="green"
                             offColor="red"
-                            label={resrv ? 'متاح للحجز' : 'غير متاح للحجز'}
+                            label={resrv ? 'فارغ' : 'محجوز'}
                             size="medium"
                             labelStyle={{ fontFamily: 'Bold', fontSize: 12 }}
-                            onToggle={() => { }
-                            }
+                            onToggle={editibile ? handleToggle : () => { }}
                         />
                     </View>
 
@@ -68,8 +81,17 @@ export const Offer = (props: OfferProps) => {
                         alignItems: 'flex-end'
                     }}>
                         <Text style={{ fontFamily: 'Bold', fontSize: 16 }}>
-                            السعر : {localPrice}
+                            السعر :
                         </Text>
+
+                        <TextInput
+                            placeholder="أدخل السعر"
+                            keyboardType="number-pad"
+                            value={localPrice}
+                            onChangeText={handlePriceChange}
+                            style={styles.textInput}
+                            readOnly={!editibile}
+                        />
 
                     </View>
                 </View>
