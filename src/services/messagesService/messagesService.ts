@@ -7,7 +7,7 @@ export const sendWhatsappMsg = async (recipient: string, type: string) => {
     const formData = new FormData();
     formData.append('Token', '793312044');
     formData.append('Phones', '+9647824846025');
-    formData.append('recipient', recipient);
+    formData.append('recipient', `+964${recipient}`);
     formData.append('Doctype', 'text');
     formData.append('Message', type === 'accept' ? acceptanceMessage : rejectionMessage);
     formData.append('account', '1');
