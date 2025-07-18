@@ -17,10 +17,11 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: "#DDDDDD",
         borderWidth: 1,
-        overflow: "hidden"
+        overflow: "hidden",
+        height: 50,
     },
     header: {
-        paddingTop:50,
+        paddingTop: 50,
         width: "100%",
         paddingHorizontal: 20,
         backgroundColor: colors.BEIGE,

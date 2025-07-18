@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
 
-export const SplashScreen = ({ route, navigation }) => {
+export const splashScreen = ({ route, navigation }) => {
     const [loading, setLoading] = useState(false);
 
     useFocusEffect(

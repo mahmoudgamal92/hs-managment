@@ -32,11 +32,10 @@ export const Tabber: React.FC<TabberProps> = ({
                             styles.tabItem,
                             {
                                 backgroundColor: isSelected ? colors.BEIGE : colors.WHITE,
-                                width: widthPercent,
                                 borderLeftWidth: index !== 0 ? 1 : 0,
+                                width: '25%',
                             },
-                        ]}
-                    >
+                        ]}>
                         <Text
                             style={[
                                 styles.tabText,

@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import {
     SignInScreen,
-    SplashScreen
+    splashScreen
 } from "@features/Auth/screens";
 
 import { ChaletManagmentScreen } from "@features/Chalets/screens";
@@ -18,7 +18,7 @@ export const AppStack = () => {
                 headerShown: false
             }}
         >
-            <HomeStack.Screen name="Splash" component={SplashScreen} />
+            <HomeStack.Screen name="Splash" component={splashScreen} />
             <HomeStack.Screen name="SignIn" component={SignInScreen} />
             <HomeStack.Screen name="Home" component={DashboardNavigator} />
             <HomeStack.Screen name="ChaletManagmentScreen" component={ChaletManagmentScreen} />

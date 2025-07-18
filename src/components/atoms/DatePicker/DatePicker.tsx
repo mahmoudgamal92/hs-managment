@@ -129,7 +129,7 @@ export const DatePicker = (props: DatePickerProps) => {
                         labelField="monthNumber"
                         valueField="monthNumber"
                         onChange={(item) => {
-                            //handleMonthChange(parseInt(item.monthNumber).toString())
+                            handleMonthChange(parseInt(item.monthNumber).toString())
                         }}
                     />
                 </View>

@@ -2,7 +2,7 @@
   "expo": {
     "name": "HS Managment",
     "slug": "hs_managment",
-    "version": "1.0.5",
+    "version": "1.0.8",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
     "userInterfaceStyle": "automatic",
@@ -15,7 +15,7 @@
       "**/*"
     ],
     "ios": {
-      "buildNumber": "5",
+      "buildNumber": "8",
       "supportsTablet": false,
       "bundleIdentifier": "com.hs.managment",
       "infoPlist": {
@@ -43,7 +43,7 @@
       }
     },
     "android": {
-      "versionCode": "5",
+      "versionCode": "8",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFF"

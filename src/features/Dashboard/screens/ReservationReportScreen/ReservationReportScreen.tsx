@@ -158,6 +158,9 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                 }}>
                     حدد نوع الحجز
                 </Text>
+
+
+
                 <View style={styles.tabber}>
                     {
                         offerTypes.map((item) =>
@@ -166,19 +169,20 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                                     setOfferType(parseFloat(item.id))
                                 }}
                                 style={{
-                                    paddingVertical: 15,
                                     backgroundColor: offerType == parseFloat(item.id) ? colors.BEIGE : colors.WHITE,
                                     borderLeftColor: "#DDDDDD",
                                     borderLeftWidth: 1,
-                                    width: "25%"
+                                    width: "25%",
+                                    height: 50,
+                                    alignItems: "center",
+                                    justifyContent: "center",
                                 }}>
 
                                 <Text style={{
-                                    fontFamily: "Regular",
+                                    fontFamily: "Bold",
                                     color: offerType == parseFloat(item.id) ? colors.WHITE : colors.BEIGE,
-                                    fontSize: 14,
+                                    fontSize: 12,
                                     textAlign: "center",
-                                    paddingHorizontal: 5
                                 }}>
                                     {item.title}
                                 </Text>
@@ -205,6 +209,7 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                         iconStyle={styles.iconStyle}
                         itemTextStyle={{ fontFamily: "Regular", fontSize: 12 }}
                         data={chalets}
+                        value={selectedChalet}
                         placeholder="اختر الشاليه"
                         maxHeight={300}
                         labelField="arabicName"
@@ -285,7 +290,7 @@ export const ReservationReportScreen = ({ route, navigation }) => {
 
             </View>
 
-        </BaseLayout>
+        </BaseLayout >
     );
 }
 
