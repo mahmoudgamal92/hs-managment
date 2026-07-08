@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
 import {
-    Text,
     View
 } from "react-native";
+import { Text } from '../Text/Text';
 import { days, months, year } from "@constants";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "./styles";
@@ -22,19 +22,19 @@ export const DatePicker = (props: DatePickerProps) => {
     const current_month = (new Date().getMonth() + 1).toString();
     const current_day = ((new Date().getDate()) + plus).toString();
 
-    const [selectedYear, setSelectedYear] = useState(current_year);
+    const [selectedYear] = useState(current_year);
     const [selectedMonth, setSelectedMonth] = useState(current_month);
     const [selectedDay, setSelectedDay] = useState(current_day);
 
 
 
-    const handleMonthChange = (month) => {
+    const handleMonthChange = (month: string) => {
         setSelectedMonth(month);
         // Notify parent component about the change
         onDateChange(selectedYear, month, selectedDay);
     };
 
-    const handleDayChange = (day) => {
+    const handleDayChange = (day: string) => {
         setSelectedDay(day);
         // Notify parent component about the change
         onDateChange(selectedYear, selectedMonth, day);
@@ -45,25 +45,18 @@ export const DatePicker = (props: DatePickerProps) => {
                 paddingVertical: 5,
                 width: "100%",
             }}>
+            <Text
+                style={{
+                    fontFamily: "Bold",
+                    textAlign: "right",
+                    marginBottom: 5,
+                    fontSize: 16,
+                    zIndex: 10,
+                }}>
+                {label}
+            </Text>
             <View style={{
-                flexDirection: "row-reverse",
-                alignItems: "center"
-            }}>
-
-                <Text
-                    style={{
-                        fontFamily: "Bold",
-                        textAlign: "right",
-                        marginBottom: 5,
-                        fontSize: 16,
-                        zIndex: 10,
-                    }}>
-                    {label}  {" "}
-                </Text>
-
-            </View>
-            <View style={{
-                flexDirection: "row-reverse",
+                flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between"
             }}>

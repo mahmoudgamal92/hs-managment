@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769169286835",
+    "project_id": "hs-managment-18b13",
+    "storage_bucket": "hs-managment-18b13.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769169286835:android:088ae0429cb56c002372c6",
+        "android_client_info": {
+          "package_name": "com.hs.managment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_vQpe3viRfveD0RYiPa4rrs0pdAzKRDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

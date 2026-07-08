@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.WHITE
     },
     tabber: {
-        flexDirection: "row-reverse",
+        flexDirection: "row",
         width: "100%",
         alignItems: "center",
         justifyContent: "space-between",
@@ -22,12 +22,32 @@ export const styles = StyleSheet.create({
     },
     header: {
         paddingTop: 50,
-        width: "100%",
+        paddingBottom: 12,
         paddingHorizontal: 20,
-        backgroundColor: colors.BEIGE,
+        width: "100%",
+        flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center",
-        paddingBottom: 5
+        justifyContent: "space-between",
+        backgroundColor: colors.BEIGE,
+    },
+    headerLogo: {
+        width: 50,
+        height: 50,
+    },
+    headerContact: {
+        alignItems: "center",
+        gap: 2,
+    },
+    headerContactText: {
+        fontFamily: "Regular",
+        color: colors.WHITE,
+        fontSize: 12,
+    },
+    headerPrivacy: {
+        fontFamily: "Bold",
+        fontSize: 10,
+        color: colors.WHITE,
+        textDecorationLine: "underline",
     },
 
     itemTitle: {
@@ -57,7 +77,7 @@ export const styles = StyleSheet.create({
         height: 150,
         alignItems: "flex-start",
         padding: 5,
-        flexDirection: "row-reverse"
+        flexDirection: "row"
     },
     itemImg: {
         width: "100%",

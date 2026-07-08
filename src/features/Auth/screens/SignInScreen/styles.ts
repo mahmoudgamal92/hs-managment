@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
 
   inputContainer: {
     paddingHorizontal: 10,
-    flexDirection: "row-reverse",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 5,

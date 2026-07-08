@@ -26,7 +26,7 @@ toastContainer: {
   },
 
   toastIcon: {
-    flexDirection: "row-reverse",
+    flexDirection: "row",
     width: "15%",
     justifyContent: "space-between"
   },

@@ -17,6 +17,10 @@ export const offerTypes = [
     {
         id: "3",
         title: "شفت مسائي"
+    },
+      {
+        id: "4",
+        title: "شفت ليلي"
     }
 ];
 
@@ -123,74 +127,74 @@ const months = [
     {
         monthNumber: '1',
         monthArabic: "1",
-        from: "2025-01-01",
-        to: "2025-01-31"
+        from: "2026-01-01",
+        to: "2026-01-31"
     },
     {
         monthNumber: '2',
         monthArabic: "2",
-        from: "2025-02-01",
-        to: "2025-02-28"
+        from: "2026-02-01",
+        to: "2026-02-28"
     },
     {
         monthNumber: '3',
         monthArabic: "3",
-        from: "2025-03-01",
-        to: "2025-03-31"
+        from: "2026-03-01",
+        to: "2026-03-31"
     },
     {
         monthNumber: '4',
         monthArabic: "4",
-        from: "2025-04-01",
-        to: "2025-04-30"
+        from: "2026-04-01",
+        to: "2026-04-30"
     },
     {
         monthNumber: '5',
         monthArabic: "5",
-        from: "2025-05-01",
-        to: "2025-05-31"
+        from: "2026-05-01",
+        to: "2026-05-31"
     },
     {
         monthNumber: '6',
         monthArabic: "6",
-        from: "2025-06-01",
-        to: "2025-06-30"
+        from: "2026-06-01",
+        to: "2026-06-30"
     },
     {
         monthNumber: '7',
         monthArabic: "7",
-        from: "2025-07-01",
-        to: "2025-07-31"
+        from: "2026-07-01",
+        to: "2026-07-31"
     },
     {
         monthNumber: '8',
         monthArabic: "8",
-        from: "2025-08-01",
-        to: "2025-08-31"
+        from: "2026-08-01",
+        to: "2026-08-31"
     },
     {
         monthNumber: '9',
         monthArabic: "9",
-        from: "2025-09-01",
-        to: "2025-09-30"
+        from: "2026-09-01",
+        to: "2026-09-30"
     },
     {
         monthNumber: '10',
         monthArabic: "10",
-        from: "2025-10-01",
-        to: "2025-10-31"
+        from: "2026-10-01",
+        to: "2026-10-31"
     },
     {
         monthNumber: '11',
         monthArabic: "11",
-        from: "2025-11-01",
-        to: "2025-11-30"
+        from: "2026-11-01",
+        to: "2026-11-30"
     },
     {
         monthNumber: '12',
         monthArabic: "12",
-        from: "2025-12-01",
-        to: "2025-12-31"
+        from: "2026-12-01",
+        to: "2026-12-31"
     }
 ]
 

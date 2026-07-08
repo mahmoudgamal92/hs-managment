@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     itemContent: {
         alignItems: "flex-start",
         justifyContent: "space-between",
-        flexDirection: "row-reverse",
+        flexDirection: "row",
         paddingHorizontal: 10,
         paddingVertical: 5,
         height: 150,
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         height: 160,
         alignItems: "flex-start",
         padding: 5,
-        flexDirection: "row-reverse"
+        flexDirection: "row"
     },
 
     itemImg: {

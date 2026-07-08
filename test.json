@@ -1,4 +1,4 @@
-console.error: Error response: {
+{
     "status": 400,
     "data": {
         "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",

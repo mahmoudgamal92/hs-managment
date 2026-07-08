@@ -1,5 +1,6 @@
 import React from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity } from "react-native";
+import { Text } from '../../atoms/Text/Text';
 import { styles } from "./styles";
 import { colors } from "@theme";
 type TabItem = {
@@ -11,7 +12,7 @@ type TabberProps = {
     data: TabItem[];
     selected: string | number;
     onSelect: (id: string | number) => void;
-    widthPercent?: string; // e.g., "25%"
+    widthPercent?: string | number;
 };
 
 export const Tabber: React.FC<TabberProps> = ({
@@ -23,7 +24,7 @@ export const Tabber: React.FC<TabberProps> = ({
     return (
         <View style={styles.tabber}>
             {data.map((item, index) => {
-                const isSelected = selected === parseFloat(String(item.id));
+                const isSelected = String(selected) === String(item.id);
                 return (
                     <TouchableOpacity
                         key={String(item.id)}
@@ -33,7 +34,7 @@ export const Tabber: React.FC<TabberProps> = ({
                             {
                                 backgroundColor: isSelected ? colors.BEIGE : colors.WHITE,
                                 borderLeftWidth: index !== 0 ? 1 : 0,
-                                width: '25%',
+                                width: widthPercent,
                             },
                         ]}>
                         <Text

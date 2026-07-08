@@ -1,6 +1,7 @@
 import {Ionicons , AntDesign} from '@expo/vector-icons';
 
-import { Text, View, Dimensions } from "react-native";
+import { View, Dimensions } from "react-native";
+import { Text } from "@components";
 import {styles} from "./styles";
 
 export const toastConfig = {
@@ -54,7 +55,7 @@ export const toastConfig = {
         <View style={{ backgroundColor: "red", width: 7, height: "100%" }} />
         <View
           style={{
-            flexDirection: "row-reverse",
+            flexDirection: "row",
             width: "15%",
             justifyContent: "space-between"
           }}

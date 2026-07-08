@@ -4,4 +4,5 @@ export type User = {
     Email: string;
     Phone: string;
     RoleName: string;
+    NotificationToken: string | null;
 }

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, TextInput } from 'react-native';
+import { Text } from '../Text/Text';
 import { colors } from '@theme';
 import ToggleSwitch from 'toggle-switch-react-native';
 import { styles } from './styles';
@@ -36,7 +37,7 @@ export const Offer = (props: OfferProps) => {
     return (
         <View style={{ paddingHorizontal: 20 }}>
             <View style={styles.offerContainer}>
-                <View style={{ flexDirection: 'row-reverse' }}>
+                <View style={{ flexDirection: 'row' }}>
                     <View style={{
                         backgroundColor: colors.BEIGE,
                         paddingHorizontal: 20,
@@ -54,7 +55,7 @@ export const Offer = (props: OfferProps) => {
                 </View>
 
                 <View style={{
-                    flexDirection: 'row-reverse',
+                    flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}>

@@ -1,30 +1,32 @@
 import {
   Image,
-  Text,
   View,
   StatusBar,
   TouchableOpacity,
   ActivityIndicator,
   TextInput,
-  ScrollView
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
+import { Text } from "@components";
 import React, { useState } from "react";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
   Feather,
   MaterialCommunityIcons,
   AntDesign,
-  Entypo
+  Entypo,
 } from "@expo/vector-icons";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "@utils";
-import { styles } from './styles';
+import { styles } from "./styles";
 import { useAuthentication } from "@features/Auth/hooks";
 
-export const SignInScreen = ({ route, navigation }) => {
+export const SignInScreen = ({ navigation }: NativeStackScreenProps<any>) => {
   const { signUser, loading } = useAuthentication({
-
     onSuccess: () => {
-      navigation.navigate('Home')
+      navigation.replace("Home");
     },
 
     onError: () => {
@@ -32,28 +34,31 @@ export const SignInScreen = ({ route, navigation }) => {
         type: "erorrToast",
         text1: " يرجى التحقق من صحة اسم المستخدم وكلمة المرور",
         bottomOffset: 80,
-        visibilityTime: 2000
+        visibilityTime: 2000,
       });
-    }
-  })
+    },
+  });
 
   //maitham_albaladawy@yahoo.com
   //P@ssw0rd
-  const [email, setEmail] = useState(__DEV__ ? "maitham_albaladawy@yahoo.com" : "");
-  const [password, setPassword] = useState(__DEV__ ? "P@ssw0rd" : "");
+  const [email, setEmail] = useState(__DEV__ ? "wanasabalad@s.com" : "");
+  const [password, setPassword] = useState(__DEV__ ? "123456" : "");
   const [passwordVisible, setPasswordVisible] = useState(true);
-
 
   const signIn = async () => {
     signUser(email, password);
   };
 
   return (
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
     <ScrollView
       contentContainerStyle={{
         flex: 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       <StatusBar backgroundColor="#F3F5F7" barStyle="default" />
@@ -71,7 +76,7 @@ export const SignInScreen = ({ route, navigation }) => {
           <TextInput
             defaultValue={email}
             style={styles.input}
-            onChangeText={text => setEmail(text)}
+            onChangeText={(text) => setEmail(text)}
             keyboardType="email-address"
             placeholder="البريد الإلكتروني"
           />
@@ -84,7 +89,7 @@ export const SignInScreen = ({ route, navigation }) => {
           <TextInput
             defaultValue={password}
             style={styles.pwdInput}
-            onChangeText={text => setPassword(text)}
+            onChangeText={(text) => setPassword(text)}
             secureTextEntry={passwordVisible}
             placeholder="كلمة المرور"
           />
@@ -93,22 +98,25 @@ export const SignInScreen = ({ route, navigation }) => {
             onPress={() => setPasswordVisible(!passwordVisible)}
             style={{ width: "10%" }}
           >
-            {passwordVisible == true
-              ? <AntDesign name="eye" size={24} color="grey" />
-              : <Entypo name="eye-with-line" size={24} color="black" />}
+            {passwordVisible == true ? (
+              <AntDesign name="eye" size={24} color="grey" />
+            ) : (
+              <Entypo name="eye-with-line" size={24} color="black" />
+            )}
           </TouchableOpacity>
         </View>
 
-
         <TouchableOpacity style={styles.primaryBtn} onPress={() => signIn()}>
-          {loading == true
-            ? <ActivityIndicator size={40} color="#FFF" />
-            : <Text style={styles.btnText}>دخول</Text>}
+          {loading == true ? (
+            <ActivityIndicator size={40} color="#FFF" />
+          ) : (
+            <Text style={styles.btnText}>دخول</Text>
+          )}
         </TouchableOpacity>
-
       </View>
 
       <Toast config={toastConfig} />
     </ScrollView>
+    </KeyboardAvoidingView>
   );
-}
+};

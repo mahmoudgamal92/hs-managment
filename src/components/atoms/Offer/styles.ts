@@ -9,7 +9,8 @@ export const styles = StyleSheet.create({
         width: '100%',
         borderRadius: 10,
         padding: 10,
-        backgroundColor: colors.WHITE
+        backgroundColor: colors.WHITE,
+        marginBottom: 10
     },
     textInput: {
         height: 40,

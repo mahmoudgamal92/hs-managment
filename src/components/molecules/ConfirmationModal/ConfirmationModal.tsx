@@ -1,5 +1,6 @@
 import React from "react";
-import { Modal, View, Text, TouchableOpacity } from "react-native";
+import { Modal, View, TouchableOpacity } from "react-native";
+import { Text } from '../../atoms/Text/Text';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@redux";
 import { hideModal } from '@redux/slices/confirmationModalSlice';

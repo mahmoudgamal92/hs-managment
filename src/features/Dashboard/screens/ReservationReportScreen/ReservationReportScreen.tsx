@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from "react";
 import {
-    Text,
     View,
     StatusBar,
     TouchableOpacity,
     ActivityIndicator,
-    ScrollView,
-    Modal,
-    Image,
-    Linking
 } from "react-native";
-import { BaseLayout, DatePicker, Header, Slider } from '@components';
+import { BaseLayout, DashboardHeader, DatePicker, Text } from '@components';
 import { useChalets } from "@features/Chalets/hooks/useChalets";
 import { Dropdown } from "react-native-element-dropdown";
-import { months, offerTypes, PRIVACY_URL } from "@constants";
+import { months, offerTypes } from "@constants";
 import { styles } from './styles';
 import { colors } from "@theme";
 import { useDashboard } from "@features/Dashboard/hooks";
 
-export const ReservationReportScreen = ({ route, navigation }) => {
+export const ReservationReportScreen = ({ navigation }: { navigation: any }) => {
     const currentYear = new Date().getFullYear().toString();
     const currentMonth = (new Date().getMonth() + 1).toString();
     const currentDay = new Date().getDate().toString();
@@ -49,7 +44,7 @@ export const ReservationReportScreen = ({ route, navigation }) => {
     );
 
 
-    const handleStartDateChange = (year, month, day) => {
+    const handleStartDateChange = (year: string, month: string, day: string) => {
         setStartDate(`${month}-${day}-${year}`);
     };
 
@@ -69,69 +64,7 @@ export const ReservationReportScreen = ({ route, navigation }) => {
     return (
         <BaseLayout>
             <StatusBar translucent backgroundColor="transparent" />
-            <View style={styles.header}>
-                <View
-                    style={{
-                        width: "100%",
-                        flexDirection: "row-reverse",
-                        justifyContent: "space-between"
-                    }}
-                >
-                    <TouchableOpacity
-                        style={{
-                            width: "33%",
-                            justifyContent: "center",
-                            alignItems: "flex-end"
-                        }}
-                    >
-
-                        <Image
-                            resizeMode='contain'
-                            source={require('@assets/logo.png')} style={{
-                                height: 50,
-                                width: 50
-                            }} />
-
-
-
-                    </TouchableOpacity>
-
-                    <View style={{ width: "33%", alignItems: "center", justifyContent: "center" }}>
-                        <Text style={{
-                            fontFamily: "Regular",
-                            color: colors.WHITE
-                        }}>
-                            للإسنفسار + واتساب
-                        </Text>
-
-                        <Text style={{
-                            fontFamily: "Regular",
-                            color: colors.WHITE
-                        }}>
-                            07824846025
-                        </Text>
-                    </View>
-
-                    <TouchableOpacity
-                        onPress={() => Linking.openURL(PRIVACY_URL)}
-                        style={{
-                            width: "33%",
-                            justifyContent: "center",
-                            alignItems: "flex-start"
-                        }}
-                    >
-                        <Text style={{
-                            fontFamily: "Bold",
-                            fontSize: 10,
-                            color: colors.WHITE
-                        }}>
-                            سياسة الخصوصية
-                        </Text>
-
-                    </TouchableOpacity>
-
-                </View>
-            </View>
+            <DashboardHeader />
             <View style={{
                 paddingHorizontal: 20,
                 paddingVertical: 20
@@ -154,7 +87,8 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                 <Text style={{
                     textAlign: 'right',
                     fontFamily: 'Bold',
-                    fontSize: 16
+                    fontSize: 16,
+                    paddingVertical:20
                 }}>
                     حدد نوع الحجز
                 </Text>
@@ -165,6 +99,7 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                     {
                         offerTypes.map((item) =>
                             <TouchableOpacity
+                                key={item.id}
                                 onPress={() => {
                                     setOfferType(parseFloat(item.id))
                                 }}
@@ -172,7 +107,7 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                                     backgroundColor: offerType == parseFloat(item.id) ? colors.BEIGE : colors.WHITE,
                                     borderLeftColor: "#DDDDDD",
                                     borderLeftWidth: 1,
-                                    width: "25%",
+                                    width: "20%",
                                     height: 50,
                                     alignItems: "center",
                                     justifyContent: "center",
@@ -181,7 +116,7 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                                 <Text style={{
                                     fontFamily: "Bold",
                                     color: offerType == parseFloat(item.id) ? colors.WHITE : colors.BEIGE,
-                                    fontSize: 12,
+                                    fontSize: 10,
                                     textAlign: "center",
                                 }}>
                                     {item.title}
@@ -191,6 +126,10 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                     }
                 </View>
 
+                <Text style={{ color: 'red', textAlign: 'right', fontFamily: 'Bold', fontSize: 11 }}>
+                    * الشفت الليلي متاح فقط في كربلاء
+                </Text>
+
                 <View style={{
                     paddingTop: 10,
 
@@ -198,7 +137,8 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                     <Text style={{
                         textAlign: 'right',
                         fontFamily: 'Bold',
-                        fontSize: 16
+                        fontSize: 16,
+                        paddingVertical:10
                     }}>
                         حدد الشاليه
                     </Text>
@@ -221,14 +161,14 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                 </View>
 
                 {offerType === 0 ?
-
                     <View style={{
                         paddingTop: 10,
                     }}>
                         <Text style={{
                             textAlign: 'right',
                             fontFamily: 'Bold',
-                            fontSize: 16
+                            fontSize: 16,
+                            paddingVertical:10
                         }}>
                             حدد الشهر
                         </Text>
@@ -263,8 +203,6 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                         />
                     </View>
                 }
-
-
                 <TouchableOpacity
                     onPress={() => applyFilter()}
                     style={{
@@ -275,7 +213,6 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                         marginVertical: 15
                     }}>
                     {loading == true ?
-
                         <ActivityIndicator size={40} color={"#FFF"} />
                         :
                         <Text style={{
@@ -287,9 +224,7 @@ export const ReservationReportScreen = ({ route, navigation }) => {
                         </Text>
                     }
                 </TouchableOpacity>
-
             </View>
-
         </BaseLayout >
     );
 }

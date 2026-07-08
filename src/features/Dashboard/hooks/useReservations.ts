@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GetResrvations, updateResrvationStatus } from '../services';
 import { Reservation } from '@types';
@@ -10,13 +9,13 @@ import { sendWhatsappMsg } from '@services';
 
 export const useReservations = () => {
   const [loading, setLoading] = useState(false);
-  const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState<Reservation[]>([]);
 
   const getUserReservations = useCallback(
     async (status: Number) => {
       const user_token = await AsyncStorage.getItem("user_token");
       setLoading(true);
-      const res = await GetResrvations(user_token, status);
+      const res = await GetResrvations(user_token ?? '', status);
 
       setLoading(false);
       if (res.status !== 200) {

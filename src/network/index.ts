@@ -1,14 +1,16 @@
 import axiosInstance from './axios';
 import {AxiosResponse} from 'axios';
-export const request = async (
-  { 
-    method, 
-    path, 
-    data = null, 
-    params = null, 
-    headers = {} 
-  })
-  : Promise<AxiosResponse> => {
+
+type RequestOptions = {
+  method: string;
+  path: string;
+  data?: Record<string, any> | null;
+  params?: Record<string, any> | null;
+  headers?: Record<string, any>;
+};
+
+export const request = async (options: RequestOptions): Promise<AxiosResponse> => {
+  const { method, path, data = null, params = null, headers = {} } = options;
   if (method === 'get') {
     return axiosInstance.get(path, {headers, params});
   }

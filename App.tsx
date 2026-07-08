@@ -1,20 +1,39 @@
-import { StyleSheet, Linking, I18nManager, Text } from "react-native";
-import { useFonts } from "expo-font";
-
-import { NavigationContainer } from '@react-navigation/native';
-
 import { AppStack } from "./src/navigation/AppStack";
 import { Provider } from "react-redux";
+import { useFonts } from "expo-font";
 import { store } from "@redux";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ConfirmationModal } from "@components/molecules/ConfirmationModal/ConfirmationModal";
-export default function App() {
-  I18nManager.forceRTL(false);
-  I18nManager.allowRTL(false);
+import { NavigationContainer } from '@react-navigation/native';
 
-  if (__DEV__) {
-    require("./ReactotronConfig");
-  }
+import { useState, useEffect } from 'react';
+import { Platform, I18nManager } from 'react-native';
+
+import * as Notifications from 'expo-notifications';
+import { registerForPushNotificationsAsync } from "@utils/notifications";
+
+I18nManager.allowRTL(false);
+I18nManager.forceRTL(false);
+
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
+if (__DEV__) {
+  require("./ReactotronConfig");
+}
+export default function App() {
+  
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [channels, setChannels] = useState<Notifications.NotificationChannel[]>([]);
+  const [notification, setNotification] = useState<Notifications.Notification | undefined>(
+    undefined
+  );
+
   let [fontsLoaded] = useFonts({
     Bold: require("./src/assets/fonts/Bold.ttf"),
     Light: require("./src/assets/fonts/Light.ttf"),
@@ -22,14 +41,30 @@ export default function App() {
     Medium: require("./src/assets/fonts/Medium.ttf"),
     ExtraBold: require("./src/assets/fonts/ExtraBold.ttf")
   });
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => token && setExpoPushToken(token));
+
+    if (Platform.OS === 'android') {
+      Notifications.getNotificationChannelsAsync().then(value => setChannels(value ?? []));
+    }
+    const notificationListener = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    const responseListener = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+    
+    return () => {
+      notificationListener.remove();
+      responseListener.remove();
+    };
+  }, []);
+
   if (!fontsLoaded) {
     return null;
   }
-
-  if ((Text as any).defaultProps == null) {
-    (Text as any).defaultProps = {};
-  }
-  (Text as any).defaultProps.allowFontScaling = false;
 
   return (
     <Provider store={store}>
@@ -40,11 +75,3 @@ export default function App() {
     </Provider>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});

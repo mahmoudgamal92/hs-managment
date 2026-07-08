@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
         marginBottom: 8
     },
     row: {
-        flexDirection: 'row-reverse',
+        flexDirection: 'row',
         justifyContent: 'space-between',
         paddingVertical: 6
     },

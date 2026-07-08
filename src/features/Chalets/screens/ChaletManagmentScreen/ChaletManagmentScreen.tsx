@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
-import { BaseLayout, Header, Offer } from "@components";
+import { View, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
+import { BaseLayout, Header, Offer, Text } from "@components";
 import { colors } from "@theme";
 import { useChalets } from "@features/Chalets/hooks/useChalets";
 

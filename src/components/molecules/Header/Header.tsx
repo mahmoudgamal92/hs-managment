@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import { Text } from '../../atoms/Text/Text';
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { colors } from '@theme';
 
@@ -10,8 +11,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ goBack, text }: HeaderProps) => {
-
-
+    
     return (
         <View
             style={{
@@ -23,7 +23,7 @@ export const Header = ({ goBack, text }: HeaderProps) => {
                 paddingBottom: 10
             }}>
             <View style={{
-                flexDirection: "row-reverse",
+                flexDirection: "row",
                 justifyContent: 'center',
                 width: '100%'
             }}>
